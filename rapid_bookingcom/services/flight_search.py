@@ -1,21 +1,13 @@
-import requests
-from dotenv import load_dotenv
-import os
 from datetime import datetime
 from typing import Optional
 from ..models.flight import Flight, Stop
 from ..models.response import FlightSearchResponse
+from .client import BookingAPIClient
 
 class FlightSearch:
     def __init__(self):
-        load_dotenv()
-        self.api_key = os.getenv("RAPID_API_KEY")
-        self.api_host = os.getenv("RAPID_API_HOST")
-        self.url = f"https://{self.api_host}/api/v1/flights/searchFlights"
-        self.headers = {
-            "x-rapidapi-key": self.api_key,
-            "x-rapidapi-host": self.api_host
-        }
+        self.client = BookingAPIClient()
+        self.endpoint = "/flights/searchFlights"
 
     def _format_flight_info(self, flight, cabin_class):
         # Extract basic flight information from the first segment
@@ -121,9 +113,9 @@ class FlightSearch:
 
         self.return_date = return_date  # Store for use in _format_flight_info
 
-        # Build query parameters
-        from_id = f"{origin}.AIRPORT"
-        to_id = f"{destination}.AIRPORT"
+        # Check if origin and destination already have a type suffix
+        from_id = origin if '.' in origin else f"{origin}.AIRPORT"
+        to_id = destination if '.' in destination else f"{destination}.AIRPORT"
 
         querystring = {
             "fromId": from_id,
@@ -138,9 +130,11 @@ class FlightSearch:
             "currency_code": currency_code
         }
 
-        # Make API call
-        response = requests.get(self.url, headers=self.headers, params=querystring)
-        data = response.json()
+        # Make API call using the base client
+        data = self.client._make_request(
+            endpoint=self.endpoint,
+            params=querystring
+        )
 
         # Process results
         if isinstance(data, dict) and 'data' in data and isinstance(data['data'], dict):

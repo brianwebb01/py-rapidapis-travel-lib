@@ -5,10 +5,7 @@ from datetime import datetime
 from rapid_bookingcom.services.flight_search import FlightSearch
 from rapid_bookingcom.models.flight import Flight, Stop
 from rapid_bookingcom.models.response import FlightSearchResponse
-
-@pytest.fixture
-def flight_search():
-    return FlightSearch()
+from rapid_bookingcom.services.client import BookingAPIClient
 
 @pytest.fixture
 def mock_response_data():
@@ -17,13 +14,13 @@ def mock_response_data():
 
 @pytest.fixture
 def mock_api_response(mock_response_data):
-    with patch('requests.get') as mock_get:
-        mock_response = MagicMock()
-        mock_response.json.return_value = mock_response_data
-        mock_get.return_value = mock_response
-        yield mock_get
+    with patch('rapid_bookingcom.services.client.BookingAPIClient._make_request') as mock_request:
+        mock_request.return_value = mock_response_data
+        yield mock_request
 
-def test_basic_flight_search(flight_search, mock_api_response):
+def test_basic_flight_search(mock_api_response):
+    flight_search = FlightSearch()
+
     # Test basic search
     response = flight_search.search(
         origin="SDF",
@@ -34,8 +31,7 @@ def test_basic_flight_search(flight_search, mock_api_response):
     # Verify API call
     mock_api_response.assert_called_once()
     call_args = mock_api_response.call_args[1]
-    assert call_args['headers']['x-rapidapi-key'] == flight_search.api_key
-    assert call_args['headers']['x-rapidapi-host'] == flight_search.api_host
+    assert call_args['endpoint'] == "/flights/searchFlights"
 
     # Verify query parameters
     params = call_args['params']
@@ -56,7 +52,9 @@ def test_basic_flight_search(flight_search, mock_api_response):
     assert len(response.results) > 0
     assert isinstance(response.results[0], Flight)
 
-def test_flight_search_with_all_options(flight_search, mock_api_response):
+def test_flight_search_with_all_options(mock_api_response):
+    flight_search = FlightSearch()
+
     # Test search with all options
     response = flight_search.search(
         origin="SDF",
@@ -92,7 +90,26 @@ def test_flight_search_with_all_options(flight_search, mock_api_response):
     assert len(response.results) > 0
     assert isinstance(response.results[0], Flight)
 
-def test_flight_model_structure(flight_search, mock_api_response):
+def test_flight_search_with_existing_suffixes(mock_api_response):
+    flight_search = FlightSearch()
+
+    # Test search with existing suffixes
+    response = flight_search.search(
+        origin="SDF.AIRPORT",
+        destination="LAS.CITY",
+        depart_date="2025-03-30"
+    )
+
+    # Verify API call
+    mock_api_response.assert_called_once()
+    call_args = mock_api_response.call_args[1]
+    params = call_args['params']
+    assert params['fromId'] == 'SDF.AIRPORT'  # Should not append .AIRPORT
+    assert params['toId'] == 'LAS.CITY'  # Should not append .AIRPORT
+
+def test_flight_model_structure(mock_api_response):
+    flight_search = FlightSearch()
+
     # Test search
     response = flight_search.search(
         origin="SDF",
@@ -118,7 +135,9 @@ def test_flight_model_structure(flight_search, mock_api_response):
     assert isinstance(flight.token, str)
     assert isinstance(flight.trip_type, str)
 
-def test_stop_model_structure(flight_search, mock_api_response):
+def test_stop_model_structure(mock_api_response):
+    flight_search = FlightSearch()
+
     # Test search
     response = flight_search.search(
         origin="SDF",
@@ -135,7 +154,9 @@ def test_stop_model_structure(flight_search, mock_api_response):
         assert isinstance(stop.city, str)
         assert isinstance(stop.duration, str)
 
-def test_response_methods(flight_search, mock_api_response):
+def test_response_methods(mock_api_response):
+    flight_search = FlightSearch()
+
     # Test search
     response = flight_search.search(
         origin="SDF",
@@ -151,12 +172,12 @@ def test_response_methods(flight_search, mock_api_response):
     assert hasattr(response, 'save_to_json')
     assert callable(response.save_to_json)
 
-def test_error_handling(flight_search):
+def test_error_handling():
+    flight_search = FlightSearch()
+
     # Test with invalid response structure
-    with patch('requests.get') as mock_get:
-        mock_response = MagicMock()
-        mock_response.json.return_value = {"invalid": "structure"}
-        mock_get.return_value = mock_response
+    with patch('rapid_bookingcom.services.client.BookingAPIClient._make_request') as mock_request:
+        mock_request.return_value = {"invalid": "structure"}
 
         with pytest.raises(ValueError):
             flight_search.search(
@@ -166,10 +187,8 @@ def test_error_handling(flight_search):
             )
 
     # Test with response missing flight offers
-    with patch('requests.get') as mock_get:
-        mock_response = MagicMock()
-        mock_response.json.return_value = {"data": {}}
-        mock_get.return_value = mock_response
+    with patch('rapid_bookingcom.services.client.BookingAPIClient._make_request') as mock_request:
+        mock_request.return_value = {"data": {}}
 
         with pytest.raises(ValueError):
             flight_search.search(
