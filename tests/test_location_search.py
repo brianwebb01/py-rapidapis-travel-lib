@@ -16,12 +16,16 @@ def mock_api_response():
     return load_stub_data()
 
 @pytest.fixture
+def mock_location_data(mock_api_response):
+    return mock_api_response['data'][0]
+
+@pytest.fixture
 def location_search():
     return LocationSearch()
 
-def test_location_model_structure(mock_api_response):
+def test_location_model_structure(mock_location_data):
     """Test that the Location model correctly parses the API response."""
-    location = Location(**mock_api_response)
+    location = Location(**mock_location_data)
 
     assert location.id == "DFW.AIRPORT"
     assert location.type == "AIRPORT"
@@ -35,7 +39,7 @@ def test_location_model_structure(mock_api_response):
 
 def test_location_search_success(location_search, mock_api_response):
     """Test successful location search."""
-    with patch.object(location_search.client, '_make_request', return_value=[mock_api_response]):
+    with patch.object(location_search.client, '_make_request', return_value=mock_api_response):
         response = location_search.search("Dallas")
 
         assert isinstance(response, LocationSearchResponse)
@@ -60,9 +64,9 @@ def test_location_search_error(location_search):
 
         assert str(exc_info.value) == "API Error"
 
-def test_location_search_response_printing(mock_api_response, capsys):
+def test_location_search_response_printing(mock_location_data, capsys):
     """Test the print_results method of LocationSearchResponse."""
-    location = Location(**mock_api_response)
+    location = Location(**mock_location_data)
     response = LocationSearchResponse([location])
 
     response.print_results()

@@ -28,10 +28,14 @@ class LocationSearch:
             "query": query
         }
 
-        data = self.client._make_request(self.endpoint, params=querystring)
+        response = self.client._make_request(self.endpoint, params=querystring)
 
-        if isinstance(data, dict) and not data.get('status', True):
-            raise LocationSearchError(data.get('message', 'Unknown error occurred'))
+        if isinstance(response, dict):
+            if not response.get('status', True):
+                raise LocationSearchError(response.get('message', 'Unknown error occurred'))
+            data = response.get('data', [])
+        else:
+            data = response
 
         locations = [Location(**location) for location in data]
         return LocationSearchResponse(locations)
