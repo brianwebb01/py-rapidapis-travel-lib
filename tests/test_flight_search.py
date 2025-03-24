@@ -4,7 +4,7 @@ import json
 from datetime import datetime
 from rapid_bookingcom.services.flight_search import FlightSearch
 from rapid_bookingcom.models.flight import Flight, Stop
-from rapid_bookingcom.models.response import FlightSearchResponse
+from rapid_bookingcom.models.flight_response import FlightSearchResponse
 from rapid_bookingcom.services.client import BookingAPIClient
 
 @pytest.fixture

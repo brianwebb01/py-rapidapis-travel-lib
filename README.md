@@ -53,6 +53,27 @@ results.print_results()
 results.save_to_json()
 ```
 
+### Location Search
+
+```python
+from rapid_bookingcom import LocationSearch
+
+# Initialize the search client
+search = LocationSearch()
+
+# Search for locations
+results = search.search(
+    query="New York",  # City name or partial name
+    locale="en_US"  # Optional, defaults to en_US
+)
+
+# Print results
+results.print_results()
+
+# Save results to JSON
+results.save_to_json()
+```
+
 ### Command Line Interface
 
 You can also use the SDK directly from the command line:
@@ -69,13 +90,14 @@ The package includes example scripts in the `examples` directory. You can find t
 python -c "import rapid_bookingcom; print(rapid_bookingcom.__file__)"
 ```
 
-Navigate to the `examples` directory in the package location to find example scripts like `flight_search.py`.
+Navigate to the `examples` directory in the package location to find example scripts like `flight_search.py` and `location_search.py`.
 
 To run an example script, you can use one of these methods:
 
 1. From any directory, using the Python module path:
 ```bash
 python -m rapid_bookingcom.examples.flight_search
+python -m rapid_bookingcom.examples.location_search
 ```
 
 2. From the project root directory (where setup.py is located):
@@ -88,6 +110,7 @@ pip install -e .
 
 # Then run the example
 python -m rapid_bookingcom.examples.flight_search
+python -m rapid_bookingcom.examples.location_search
 ```
 
 The first method is recommended as it works regardless of your current directory. Make sure you have:

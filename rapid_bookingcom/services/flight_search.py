@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 from ..models.flight import Flight, Stop
-from ..models.response import FlightSearchResponse
+from ..models.flight_response import FlightSearchResponse
 from .client import BookingAPIClient
 
 class FlightSearch:

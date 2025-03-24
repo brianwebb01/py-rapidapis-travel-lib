@@ -1,0 +1,13 @@
+{
+  "id": "DFW.AIRPORT",
+  "type": "AIRPORT",
+  "name": "Dallas-Fort Worth International Airport",
+  "code": "DFW",
+  "regionName": "Texas",
+  "countryName": "United States",
+  "cityName": "Dallas",
+  "distanceToCity": {
+    "value": 25.903681159530844,
+    "unit": "km"
+  }
+}
