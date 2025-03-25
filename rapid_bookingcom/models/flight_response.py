@@ -27,7 +27,7 @@ class FlightSearchResponse:
             else:
                 print("Direct Flight")
 
-            print(f"Token: {flight.token}")
+            print(f"Booking URL: {flight.bookingcom_url()}")
             print("-" * 50)
 
     def save_to_json(self, filename: str = 'structured_flights.json'):

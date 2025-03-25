@@ -106,7 +106,7 @@ class FlightSearch:
                return_date: Optional[str] = None,
                cabin_class: str = "ECONOMY",
                adults: str = "1",
-               children: str = "0,17",
+               children: str = "0,17", #comma separated list of children ages in years
                sort: str = "BEST",
                currency_code: str = "USD",
                page_no: str = "1"):

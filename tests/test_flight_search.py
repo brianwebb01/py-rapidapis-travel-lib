@@ -135,6 +135,11 @@ def test_flight_model_structure(mock_api_response):
     assert isinstance(flight.token, str)
     assert isinstance(flight.trip_type, str)
 
+    # Verify bookingcom_url method exists and is callable
+    assert hasattr(flight, 'bookingcom_url')
+    assert callable(flight.bookingcom_url)
+    assert isinstance(flight.bookingcom_url(), str)
+
 def test_stop_model_structure(mock_api_response):
     flight_search = FlightSearch()
 
