@@ -11,9 +11,6 @@ class Price(BaseModel):
     def __str__(self) -> str:
         return f"{self.amount} {self.currency}"
 
-    def __getitem__(self, key):
-        return getattr(self, key)
-
 class Stop(BaseModel):
     city: str
     airport: str

@@ -19,25 +19,6 @@ class FlightSearch:
         """
         self.client = client
 
-    def search_locations(self, query: str) -> List[Location]:
-        """Search for locations (airports, cities) by query string.
-
-        Args:
-            query (str): Search query (e.g. airport code or city name)
-
-        Returns:
-            List[Location]: List of matching locations
-        """
-        response = self.client.search_locations(query)
-        if not response.get('status'):
-            raise ValueError("API request failed")
-
-        return [
-            Location.from_api_response(item)
-            for item in response.get('data', [])
-            if item.get('navigation', {}).get('entityType') == 'AIRPORT'
-        ]
-
     def search(
         self,
         origin_sky_id: str,

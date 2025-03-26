@@ -9,11 +9,6 @@ from skyscanner_travel.models.location import Location
 from skyscanner_travel.models.location_response import LocationResponse
 from skyscanner_travel.services.flight_search import FlightSearch
 
-def load_stub_data():
-    stub_path = os.path.join(os.path.dirname(__file__), "stubs", "location_search_response.json")
-    with open(stub_path, "r") as f:
-        return json.load(f)
-
 @pytest.fixture
 def mock_api_response():
     with patch('skyscanner_travel.services.skyscanner_client.SkyscannerClient._make_request') as mock_request:
