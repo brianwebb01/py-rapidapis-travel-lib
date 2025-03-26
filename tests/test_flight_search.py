@@ -1,9 +1,11 @@
 import pytest
 from unittest.mock import patch, MagicMock
 import json
+import os
 from datetime import datetime
-from skyscanner_travel.services.flight_search import FlightSearch
-from skyscanner_travel.models.flight import Flight, FlightSearchResponse
+from skyscanner_travel.services.flight_search import FlightSearch, FlightSearchError
+from skyscanner_travel.models.flight import Flight
+from skyscanner_travel.models.flight_response import FlightSearchResponse
 from skyscanner_travel.services.skyscanner_client import SkyscannerClient
 
 @pytest.fixture

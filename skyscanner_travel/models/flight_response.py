@@ -5,38 +5,36 @@ from .flight import Flight
 
 class FlightSearchResponse(BaseModel):
     flights: List[Flight]
-    total_results: int = 0
-    currency: str = "USD"
-    market: str = "US"
-    locale: str = "en-US"
-    country_code: str = "US"
+    total_results: int
+    currency: str
+    market: str
+    locale: str
+    country_code: str
 
     def __str__(self) -> str:
-        return f"{self.total_results} flights found"
+        return f"Found {self.total_results} flights"
 
     def print_results(self) -> None:
-        print("\nAvailable Flights:")
-        print("=" * 50)
+        print(f"\nFound {self.total_results} flights:")
         for i, flight in enumerate(self.flights, 1):
-            print(f"\nFlight Option {i}:")
-            print(f"Airline: {flight.airline}")
-            print(f"Flight Number: {flight.flight_number}")
-            print(f"From: {flight.origin_city} ({flight.origin}) to {flight.destination_city} ({flight.destination})")
-            print(f"Departure: {flight.departure['date']} at {flight.departure['time']}")
-            print(f"Arrival: {flight.arrival['date']} at {flight.arrival['time']}")
-            print(f"Duration: {flight.total_duration}")
-            print(f"Cabin Class: {flight.cabin_class}")
-            print(f"Price: {flight.price.amount} {flight.price.currency}")
+            print(f"\n{i}. {flight.airline} {flight.flight_number}")
+            #print(f"   ID: {flight.id} Session ID: {flight.session_id}")
+            print(f"   From: {flight.origin_city} ({flight.origin.code})")
+            print(f"   To: {flight.destination_city} ({flight.destination.code})")
+            print(f"   Departure: {flight.departure['date']} at {flight.departure['time']}")
+            print(f"   Arrival: {flight.arrival['date']} at {flight.arrival['time']}")
+            print(f"   Duration: {flight.total_duration}")
 
-            if flight.stops:
-                stop = flight.stops[0]
-                print(f"{len(flight.stops)} stop{'s' if len(flight.stops) > 1 else ''}, {stop.city} ({stop.airport}), {stop.duration}")
+            if isinstance(flight.stops, list) and flight.stops:
+                print(f"   Stops: {len(flight.stops)}")
+                for j, stop in enumerate(flight.stops, 1):
+                    print(f"      {j}. {stop.city} ({stop.airport}) - {stop.duration}")
             else:
-                print("Direct Flight")
+                print("   Direct flight")
 
+            print(f"   Price: {flight.price}")
             if flight.booking_url:
-                print(f"Booking URL: {flight.booking_url}")
-            print("-" * 50)
+                print(f"   Book at: {flight.booking_url}")
 
     def save_to_json(self, filename: str = 'structured_flights.json') -> None:
         with open(filename, 'w') as f:
@@ -50,5 +48,9 @@ class FlightSearchResponse(BaseModel):
                 flights.append(Flight.from_api_response({"itinerary": itinerary}))
         return cls(
             flights=flights,
-            total_results=len(flights)
+            total_results=len(flights),
+            currency="USD",
+            market="US",
+            locale="en-US",
+            country_code="US"
         )

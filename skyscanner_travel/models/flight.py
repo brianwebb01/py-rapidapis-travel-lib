@@ -9,144 +9,129 @@ class Price(BaseModel):
     currency: str
 
     def __str__(self) -> str:
-        return f"{self.amount:.2f} {self.currency}"
+        return f"{self.amount} {self.currency}"
 
     def __getitem__(self, key):
         return getattr(self, key)
 
 class Stop(BaseModel):
-    airport: str
     city: str
+    airport: str
     duration: str
 
 class Flight(BaseModel):
     """Model representing a flight from Skyscanner."""
 
-    id: Optional[str] = None
-    origin: Union[str, Location]
-    origin_city: str
-    destination: Union[str, Location]
-    destination_city: str
-    departure: Union[str, Dict[str, str]]
-    arrival: Union[str, Dict[str, str]]
+    id: str
+    session_id: str
     airline: str
     flight_number: str
-    price: Union[Price, Dict[str, Union[float, str]]]
-    cabin_class: str = "ECONOMY"
-    stops: Union[List[Union[Stop, Dict[str, str]]], int] = []
+    origin: Location
+    destination: Location
+    origin_city: str
+    destination_city: str
+    departure: Dict[str, str]
+    arrival: Dict[str, str]
     total_duration: str
-    itinerary_id: str
+    cabin_class: str
+    price: Price
+    stops: List[Stop]
     booking_url: Optional[str] = None
-    session_id: Optional[str] = None
+
+    @property
+    def itinerary_id(self) -> str:
+        return self.id
 
     def __str__(self) -> str:
-        departure_time = self.departure['time'] if isinstance(self.departure, dict) else self.departure
-        arrival_time = self.arrival['time'] if isinstance(self.arrival, dict) else self.arrival
+        departure_time = self.departure['time']
+        arrival_time = self.arrival['time']
         return f"{departure_time} - {arrival_time} ({self.total_duration}), {self.price}"
 
     @classmethod
     def from_api_response(cls, response: Dict) -> "Flight":
-        itinerary = response['itinerary']
-        leg = itinerary['legs'][0]
-        segment = leg['segments'][0]
+        itinerary = response["itinerary"]
+        legs = itinerary["legs"]
+        first_leg = legs[0]
+        first_segment = first_leg["segments"][0]
 
         # Format departure and arrival times
-        departure_time = datetime.strptime(segment['departure'], '%Y-%m-%dT%H:%M:%S')
-        arrival_time = datetime.strptime(segment['arrival'], '%Y-%m-%dT%H:%M:%S')
+        departure_time = datetime.strptime(first_leg["departure"], "%Y-%m-%dT%H:%M:%S")
+        arrival_time = datetime.strptime(first_leg["arrival"], "%Y-%m-%dT%H:%M:%S")
 
         # Format duration
-        duration_minutes = leg.get('duration', 0)
+        duration_minutes = first_leg["duration"]
         hours = duration_minutes // 60
         minutes = duration_minutes % 60
         duration_str = f"{hours}h {minutes}m" if hours > 0 else f"{minutes}m"
 
-        # Get origin and destination details
-        origin = segment['origin']
-        destination = segment['destination']
-
-        # Get price and booking URL from itinerary
-        pricing_option = itinerary.get('pricingOptions', [{}])[0]
-        agent = pricing_option.get('agents', [{}])[0]
-        price_amount = float(agent.get('price', 0))
-        price_currency = "USD"  # Default to USD as per API response
-        booking_url = agent.get('url', '')
-
-        # Get city names from the API response
-        origin_city = origin.get('city', '')
-        destination_city = destination.get('city', '')
-
         # Get stops information
         stops = []
-        if leg.get('stopCount', 0) > 0:
-            for stop in leg.get('stops', []):
+        if first_leg["stopCount"] > 0:
+            for i in range(len(first_leg["segments"]) - 1):
+                current_segment = first_leg["segments"][i]
+                next_segment = first_leg["segments"][i + 1]
+                stop_duration = datetime.strptime(next_segment["departure"], "%Y-%m-%dT%H:%M:%S") - datetime.strptime(current_segment["arrival"], "%Y-%m-%dT%H:%M:%S")
+                stop_hours = int(stop_duration.total_seconds() // 3600)
+                stop_minutes = int((stop_duration.total_seconds() % 3600) // 60)
+                stop_duration_str = f"{stop_hours}h {stop_minutes}m" if stop_hours > 0 else f"{stop_minutes}m"
                 stops.append(Stop(
-                    airport=stop.get('displayCode', ''),
-                    city=stop.get('city', {}).get('name', ''),
-                    duration=stop.get('duration', '')
+                    airport=current_segment["destination"]["displayCode"],
+                    city=current_segment["destination"]["city"],
+                    duration=stop_duration_str
                 ))
 
+        # Get price information
+        price_option = itinerary["pricingOptions"][0]
+        agent = price_option["agents"][0]
+
+        # Create Location instances
+        origin = Location.from_api_response(first_leg["origin"])
+        if origin is None:
+            origin = Location(
+                entityId=first_leg["origin"]["id"],
+                skyId=first_leg["origin"]["displayCode"],
+                name=first_leg["origin"]["name"],
+                type="AIRPORT",
+                city_name=first_leg["origin"]["city"],
+                region_name="",
+                country_name=""
+            )
+
+        destination = Location.from_api_response(first_leg["destination"])
+        if destination is None:
+            destination = Location(
+                entityId=first_leg["destination"]["id"],
+                skyId=first_leg["destination"]["displayCode"],
+                name=first_leg["destination"]["name"],
+                type="AIRPORT",
+                city_name=first_leg["destination"]["city"],
+                region_name="",
+                country_name=""
+            )
+
         return cls(
-            id=itinerary.get('id'),
-            origin=Location(
-                entityId=origin.get('id', ''),
-                skyId=origin.get('displayCode', ''),
-                name=origin.get('name', ''),
-                type="AIRPORT",
-                city_name=origin_city,
-                region_name="",
-                country_name=origin.get('country', ''),
-                distance_to_city_value=None,
-                distance_to_city_unit=None
-            ),
-            origin_city=origin_city,
-            destination=Location(
-                entityId=destination.get('id', ''),
-                skyId=destination.get('displayCode', ''),
-                name=destination.get('name', ''),
-                type="AIRPORT",
-                city_name=destination_city,
-                region_name="",
-                country_name=destination.get('country', ''),
-                distance_to_city_value=None,
-                distance_to_city_unit=None
-            ),
-            destination_city=destination_city,
+            id=itinerary["id"],
+            session_id=response.get("sessionId", "default_session"),
+            airline=first_segment["marketingCarrier"]["name"],
+            flight_number=first_segment["flightNumber"],
+            origin=origin,
+            destination=destination,
+            origin_city=first_leg["origin"]["city"],
+            destination_city=first_leg["destination"]["city"],
             departure={
-                'date': departure_time.strftime('%A, %B %d'),
-                'time': departure_time.strftime('%I:%M%p').lower()
+                "date": departure_time.strftime("%A, %B %d"),
+                "time": departure_time.strftime("%I:%M%p").lower()
             },
             arrival={
-                'date': arrival_time.strftime('%A, %B %d'),
-                'time': arrival_time.strftime('%I:%M%p').lower()
+                "date": arrival_time.strftime("%A, %B %d"),
+                "time": arrival_time.strftime("%I:%M%p").lower()
             },
-            airline=segment.get('marketingCarrier', {}).get('name', ''),
-            flight_number=segment.get('flightNumber', ''),
-            price=Price(
-                amount=price_amount,
-                currency=price_currency
-            ),
-            cabin_class=itinerary.get('cabinClass', 'ECONOMY'),
-            stops=stops,
             total_duration=duration_str,
-            itinerary_id=itinerary.get('id', ''),
-            booking_url=booking_url,
-            session_id=response.get('sessionId', '')
+            cabin_class="ECONOMY",  # Default to ECONOMY as it's not in the API response
+            price=Price(
+                amount=float(agent["price"]),
+                currency="USD"  # Default to USD as it's not in the API response
+            ),
+            stops=stops,
+            booking_url=agent.get("url")
         )
-
-class FlightSearchResponse(BaseModel):
-    flights: List[Flight]
-    total_results: int
-    currency: str
-    market: str
-    locale: str
-    country_code: str
-
-    def __str__(self) -> str:
-        return f"Found {self.total_results} flights"
-
-    def print_results(self) -> None:
-        print(f"\nFound {self.total_results} flights:")
-        for i, flight in enumerate(self.flights, 1):
-            print(f"\n{i}. {flight}")
-            if flight.booking_url:
-                print(f"   Book at: {flight.booking_url}")

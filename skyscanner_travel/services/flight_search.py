@@ -2,7 +2,8 @@ from typing import List, Optional, Dict, Any
 from datetime import datetime
 from .skyscanner_client import SkyscannerClient
 from ..models.location import Location
-from ..models.flight import Flight, FlightSearchResponse, Price, Stop
+from ..models.flight import Flight, Price, Stop
+from ..models.flight_response import FlightSearchResponse
 
 class FlightSearchError(Exception):
     pass
@@ -194,7 +195,7 @@ class FlightSearch:
                         currency=price_currency
                     ),
                     cabin_class=cabin_class,
-                    stops=stops if stops else 0,
+                    stops=stops if stops else [],
                     total_duration=duration_str,
                     itinerary_id=itinerary.get('id', ''),
                     booking_url=itinerary.get('pricingOptions', [{}])[0].get('items', [{}])[0].get('deepLink', ''),

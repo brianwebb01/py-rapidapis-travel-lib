@@ -1,23 +1,41 @@
 import pytest
 from datetime import datetime
-from skyscanner_travel.models.flight import Flight
+from skyscanner_travel.models.flight import Flight, Price, Stop
+from skyscanner_travel.models.location import Location
 
 def test_bookingcom_url():
     # Create a test flight with known values
     flight = Flight(
-        origin='SDF',
+        id='16157-2503301340--31829-0-13411-2503301450',
+        session_id='fae74729-71d7-4084-80a4-43ae480b3f97',
+        origin=Location(
+            entity_id='16157',
+            code='SDF',
+            name='Louisville Muhammad Ali International',
+            type='AIRPORT',
+            city_name='Louisville',
+            region_name='',
+            country_name='United States'
+        ),
         origin_city='Louisville',
-        destination='LAS',
+        destination=Location(
+            entity_id='13411',
+            code='LAS',
+            name='Las Vegas Harry Reid International',
+            type='AIRPORT',
+            city_name='Las Vegas',
+            region_name='',
+            country_name='United States'
+        ),
         destination_city='Las Vegas',
         departure={'date': '03/30/2025', 'time': '05:12 PM'},
         arrival={'date': '03/30/2025', 'time': '11:40 PM'},
         airline='Southwest Airlines',
         flight_number='WN3109',
-        price={'amount': 578.48, 'currency': 'USD'},
+        price=Price(amount=578.48, currency='USD'),
         cabin_class='ECONOMY',
-        stops=[{'airport': 'MCO', 'city': 'Orlando', 'duration': '1h 45m'}],
+        stops=[Stop(airport='MCO', city='Orlando', duration='1h 45m')],
         total_duration='4h 10m',
-        itinerary_id='16157-2503301340--31829-0-13411-2503301450',
         booking_url='https://www.skyscanner.net/transport_deeplink/4.0/US/en-US/USD/swa_/1/16157.13411.2025-03-30/air/airli/flights?itinerary=flight|-31829|3109|16157|2025-03-30T13:40|13411|2025-03-30T14:50|250|WLN0P4Q|W|PLU&carriers=-31829&operators=-31829&passengers=1&channel=iphone&cabin_class=economy&fps_session_id=fae74729-71d7-4084-80a4-43ae480b3f97&is_npt=false&is_multipart=false&client_id=skyscanner_app&request_id=adb2fd4d-828c-3dab-e187-31697989db50&q_ids=H4sIAAAAAAAA_-OS4mIpLk-MF2LmmFsnxczxOEOhYfKi_WxGTAqMACD7p9QcAAAA|-5473719741490957552|2&q_sources=JACQUARD&commercial_filters=false&q_datetime_utc=2025-03-26T00:45:31&pqid=false'
     )
 
@@ -35,19 +53,36 @@ def test_bookingcom_url():
 def test_bookingcom_url_with_different_cabin():
     # Test with a different cabin class
     flight = Flight(
-        origin='SDF',
+        id='16157-2503301340--31829-0-13411-2503301450',
+        session_id='fae74729-71d7-4084-80a4-43ae480b3f97',
+        origin=Location(
+            entity_id='16157',
+            code='SDF',
+            name='Louisville Muhammad Ali International',
+            type='AIRPORT',
+            city_name='Louisville',
+            region_name='',
+            country_name='United States'
+        ),
         origin_city='Louisville',
-        destination='LAS',
+        destination=Location(
+            entity_id='13411',
+            code='LAS',
+            name='Las Vegas Harry Reid International',
+            type='AIRPORT',
+            city_name='Las Vegas',
+            region_name='',
+            country_name='United States'
+        ),
         destination_city='Las Vegas',
         departure={'date': '03/30/2025', 'time': '05:12 PM'},
         arrival={'date': '03/30/2025', 'time': '11:40 PM'},
         airline='Southwest Airlines',
         flight_number='WN3109',
-        price={'amount': 578.48, 'currency': 'USD'},
+        price=Price(amount=578.48, currency='USD'),
         cabin_class='BUSINESS',
         stops=[],
         total_duration='4h 10m',
-        itinerary_id='16157-2503301340--31829-0-13411-2503301450',
         booking_url='https://www.skyscanner.net/transport_deeplink/4.0/US/en-US/USD/swa_/1/16157.13411.2025-03-30/air/airli/flights?itinerary=flight|-31829|3109|16157|2025-03-30T13:40|13411|2025-03-30T14:50|250|WLN0P4Q|W|PLU&carriers=-31829&operators=-31829&passengers=1&channel=iphone&cabin_class=business&fps_session_id=fae74729-71d7-4084-80a4-43ae480b3f97&is_npt=false&is_multipart=false&client_id=skyscanner_app&request_id=adb2fd4d-828c-3dab-e187-31697989db50&q_ids=H4sIAAAAAAAA_-OS4mIpLk-MF2LmmFsnxczxOEOhYfKi_WxGTAqMACD7p9QcAAAA|-5473719741490957552|2&q_sources=JACQUARD&commercial_filters=false&q_datetime_utc=2025-03-26T00:45:31&pqid=false'
     )
 
@@ -57,19 +92,36 @@ def test_bookingcom_url_with_different_cabin():
 def test_bookingcom_url_without_booking_url():
     # Test when no booking URL is provided
     flight = Flight(
-        origin='SDF',
+        id='16157-2503301340--31829-0-13411-2503301450',
+        session_id='fae74729-71d7-4084-80a4-43ae480b3f97',
+        origin=Location(
+            entity_id='16157',
+            code='SDF',
+            name='Louisville Muhammad Ali International',
+            type='AIRPORT',
+            city_name='Louisville',
+            region_name='',
+            country_name='United States'
+        ),
         origin_city='Louisville',
-        destination='LAS',
+        destination=Location(
+            entity_id='13411',
+            code='LAS',
+            name='Las Vegas Harry Reid International',
+            type='AIRPORT',
+            city_name='Las Vegas',
+            region_name='',
+            country_name='United States'
+        ),
         destination_city='Las Vegas',
         departure={'date': '03/30/2025', 'time': '05:12 PM'},
         arrival={'date': '03/30/2025', 'time': '11:40 PM'},
         airline='Southwest Airlines',
         flight_number='WN3109',
-        price={'amount': 578.48, 'currency': 'USD'},
+        price=Price(amount=578.48, currency='USD'),
         cabin_class='ECONOMY',
         stops=[],
-        total_duration='4h 10m',
-        itinerary_id='16157-2503301340--31829-0-13411-2503301450'
+        total_duration='4h 10m'
     )
 
     url = flight.booking_url
