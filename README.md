@@ -1,147 +1,98 @@
-# Rapid Booking.com SDK
+# Skyscanner Travel API Library
 
-A Python SDK for interacting with Booking.com APIs through RapidAPI. Currently supports flight searches with plans to expand to hotels and car rentals.
+A Python library for interacting with the Skyscanner API via RapidAPI to search for flights and get booking URLs.
+
+## Features
+
+- Search for airports and cities
+- Search for available flights
+- Get detailed flight information
+- Generate booking URLs for flights
+- Support for different cabin classes
+- Support for multi-leg flights with stops
 
 ## Installation
 
 ```bash
-pip install rapid-bookingcom
-```
-
-For development or running examples, install in development mode from the source directory:
-```bash
-pip install -e .
-```
-
-## Configuration
-
-Before using the SDK, you need to set up your RapidAPI credentials. Create a `.env` file in your project root with the following variables:
-
-```
-RAPID_API_KEY=your_rapidapi_key_here
-RAPID_API_HOST=booking-com.p.rapidapi.com
+pip install skyscanner-travel
 ```
 
 ## Usage
 
-### Flight Search
-
 ```python
-from rapid_bookingcom import FlightSearch
+from skyscanner_travel.services.flight_search import FlightSearch
 
-# Initialize the search client
-search = FlightSearch()
-
-# Search for flights
-results = search.search(
-    origin="SDF",  # Airport code
-    destination="LAS",  # Airport code
-    depart_date="2024-04-01",  # Format: YYYY-MM-DD
-    return_date="2024-04-05",  # Optional
-    cabin_class="ECONOMY",  # Optional, defaults to ECONOMY
-    adults="1",  # Optional, defaults to 1
-    children="0,17",  # Optional, defaults to 0,17
-    sort="BEST",  # Optional, defaults to BEST
-    currency_code="USD",  # Optional, defaults to USD
-    page_no="1"  # Optional, defaults to 1
-)
-
-# Print results
-results.print_results()
-
-# Save results to JSON
-results.save_to_json()
-```
-
-### Location Search
-
-```python
-from rapid_bookingcom import LocationSearch
-
-# Initialize the search client
-search = LocationSearch()
+# Initialize the service with your RapidAPI key
+flight_search = FlightSearch(api_key="your-rapidapi-key")
 
 # Search for locations
-results = search.search(
-    query="New York",  # City name or partial name
-    locale="en_US"  # Optional, defaults to en_US
+locations = flight_search.search_locations("LAS")
+
+# Search for flights
+flights = flight_search.search_flights(
+    origin="SDF",
+    destination="LAS",
+    date="2025-03-30",
+    cabin_class="economy",
+    adults=1
 )
 
-# Print results
-results.print_results()
-
-# Save results to JSON
-results.save_to_json()
+# Get booking URL for a flight
+for flight in flights:
+    print(f"Flight {flight.airline} {flight.flight_number}")
+    print(f"From: {flight.origin_city} ({flight.origin})")
+    print(f"To: {flight.destination_city} ({flight.destination})")
+    print(f"Departure: {flight.departure['date']} {flight.departure['time']}")
+    print(f"Arrival: {flight.arrival['date']} {flight.arrival['time']}")
+    print(f"Price: ${flight.price['amount']} {flight.price['currency']}")
+    print(f"Booking URL: {flight.bookingcom_url()}")
+    print()
 ```
 
-### Command Line Interface
+## API Reference
 
-You can also use the SDK directly from the command line:
+### FlightSearch
 
-```bash
-rapid-bookingcom
-```
+#### `search_locations(query: str) -> List[Location]`
 
-### Examples
+Search for locations (airports, cities) by query string.
 
-The package includes example scripts in the `examples` directory. You can find them in your Python environment after installation:
+**Parameters:**
+- `query` (str): Search query (e.g. airport code or city name)
 
-```bash
-python -c "import rapid_bookingcom; print(rapid_bookingcom.__file__)"
-```
+**Returns:**
+- List[Location]: List of matching locations
 
-Navigate to the `examples` directory in the package location to find example scripts like `flight_search.py` and `location_search.py`.
+#### `search_flights(origin: str, destination: str, date: str, cabin_class: str = "economy", adults: int = 1, children: int = 0, infants: int = 0) -> List[Flight]`
 
-To run an example script, you can use one of these methods:
+Search for available flights.
 
-1. From any directory, using the Python module path:
-```bash
-python -m rapid_bookingcom.examples.flight_search
-python -m rapid_bookingcom.examples.location_search
-```
+**Parameters:**
+- `origin` (str): Origin airport code (e.g. "SDF")
+- `destination` (str): Destination airport code (e.g. "LAS")
+- `date` (str): Departure date in YYYY-MM-DD format
+- `cabin_class` (str): Cabin class (default: economy)
+- `adults` (int): Number of adult passengers
+- `children` (int): Number of child passengers
+- `infants` (int): Number of infant passengers
 
-2. From the project root directory (where setup.py is located):
-```bash
-# First, make sure you're in the project root directory (where setup.py is)
-cd /path/to/py-rapidapis-booking-com-lib
+**Returns:**
+- List[Flight]: List of available flights
 
-# Install the package in development mode
-pip install -e .
+### Flight
 
-# Then run the example
-python -m rapid_bookingcom.examples.flight_search
-python -m rapid_bookingcom.examples.location_search
-```
+#### `bookingcom_url() -> str`
 
-The first method is recommended as it works regardless of your current directory. Make sure you have:
-1. Installed the package in development mode (`pip install -e .`)
-2. Set up your `.env` file with your RapidAPI credentials
+Generate a booking URL for the flight.
 
-## Features
+**Returns:**
+- str: The booking URL for the flight
 
-- Flight search with detailed information
-- Support for one-way, round-trip, and multi-city flights
-- Detailed stop information for connecting flights
-- Price information with currency
-- Cabin class selection
-- Passenger configuration
-- Results can be printed to console or saved to JSON
+## Development
 
-## Future Features
-
-- Hotel search and booking
-- Car rental search and booking
-- More booking options and configurations
-- Additional API endpoints support
-
-## Requirements
-
-- Python 3.8 or higher
-- RapidAPI account with Booking.com API access
-- Required Python packages (installed automatically):
-  - requests
-  - python-dotenv
-  - pydantic
+1. Clone the repository
+2. Install dependencies: `pip install -r requirements.txt`
+3. Run tests: `python -m pytest tests/`
 
 ## License
 

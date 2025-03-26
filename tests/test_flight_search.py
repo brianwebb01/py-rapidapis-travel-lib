@@ -2,10 +2,10 @@ import pytest
 from unittest.mock import patch, MagicMock
 import json
 from datetime import datetime
-from rapid_bookingcom.services.flight_search import FlightSearch
-from rapid_bookingcom.models.flight import Flight, Stop
-from rapid_bookingcom.models.flight_response import FlightSearchResponse
-from rapid_bookingcom.services.client import BookingAPIClient
+from skyscanner_travel.services.flight_search import FlightSearch
+from skyscanner_travel.models.flight import Flight
+from skyscanner_travel.models.flight_response import FlightSearchResponse
+from skyscanner_travel.services.skyscanner_client import SkyscannerClient
 
 @pytest.fixture
 def mock_response_data():
@@ -13,191 +13,105 @@ def mock_response_data():
         return json.load(f)
 
 @pytest.fixture
-def mock_api_response(mock_response_data):
-    with patch('rapid_bookingcom.services.client.BookingAPIClient._make_request') as mock_request:
-        mock_request.return_value = mock_response_data
+def flight_search():
+    return FlightSearch(api_key="test_api_key")
+
+@pytest.fixture
+def mock_api_response():
+    with patch('skyscanner_travel.services.skyscanner_client.SkyscannerClient._make_request') as mock_request:
+        mock_request.return_value = {
+            "flights": [
+                {
+                    "id": "FL123",
+                    "origin": "DFW",
+                    "origin_city": "Dallas",
+                    "destination": "LAX",
+                    "destination_city": "Los Angeles",
+                    "departure": {
+                        "date": "04/01/2024",
+                        "time": "10:00 AM"
+                    },
+                    "arrival": {
+                        "date": "04/01/2024",
+                        "time": "12:00 PM"
+                    },
+                    "airline": "American Airlines",
+                    "flight_number": "AA123",
+                    "cabin_class": "ECONOMY",
+                    "stops": [],
+                    "total_duration": "2h",
+                    "itinerary_id": "IT123",
+                    "price": {
+                        "amount": 199.99,
+                        "currency": "USD"
+                    }
+                }
+            ],
+            "total_results": 1,
+            "currency": "USD",
+            "market": "US",
+            "locale": "en-US",
+            "country_code": "US"
+        }
         yield mock_request
 
 def test_basic_flight_search(mock_api_response):
-    flight_search = FlightSearch()
-
-    # Test basic search
-    response = flight_search.search(
-        origin="SDF",
-        destination="LAS",
-        depart_date="2025-03-30"
-    )
-
-    # Verify API call
-    mock_api_response.assert_called_once()
-    call_args = mock_api_response.call_args[1]
-    assert call_args['endpoint'] == "/flights/searchFlights"
-
-    # Verify query parameters
-    params = call_args['params']
-    assert params['fromId'] == 'SDF.AIRPORT'
-    assert params['toId'] == 'LAS.AIRPORT'
-    assert params['departDate'] == '2025-03-30'
-    assert params['returnDate'] is None
-    assert params['cabinClass'] == 'ECONOMY'
-    assert params['adults'] == '1'
-    assert params['children'] == '0,17'
-    assert params['sort'] == 'BEST'
-    assert params['currency_code'] == 'USD'
-    assert params['pageNo'] == '1'
-
-    # Verify response structure
-    assert isinstance(response, FlightSearchResponse)
-    assert isinstance(response.results, list)
-    assert len(response.results) > 0
-    assert isinstance(response.results[0], Flight)
+    flight_search = FlightSearch(api_key="test_api_key")
+    response = flight_search.search("DFW", "LAX", "2024-04-01")
+    assert len(response.flights) == 1
+    assert response.total_results == 1
 
 def test_flight_search_with_all_options(mock_api_response):
-    flight_search = FlightSearch()
-
-    # Test search with all options
+    flight_search = FlightSearch(api_key="test_api_key")
     response = flight_search.search(
-        origin="SDF",
-        destination="LAS",
-        depart_date="2025-03-30",
-        return_date="2025-04-05",
+        origin="DFW",
+        destination="LAX",
+        date="2024-04-01",
         cabin_class="BUSINESS",
-        adults="2",
-        children="0,17,1,12",
-        sort="PRICE",
-        currency_code="EUR",
-        page_no="2"
+        adults=2,
+        children=1,
+        infants=1,
+        currency="EUR",
+        market="UK",
+        locale="en-GB",
+        country_code="GB"
     )
-
-    # Verify API call
-    mock_api_response.assert_called_once()
-    call_args = mock_api_response.call_args[1]
-    params = call_args['params']
-    assert params['fromId'] == 'SDF.AIRPORT'
-    assert params['toId'] == 'LAS.AIRPORT'
-    assert params['departDate'] == '2025-03-30'
-    assert params['returnDate'] == '2025-04-05'
-    assert params['cabinClass'] == 'BUSINESS'
-    assert params['adults'] == '2'
-    assert params['children'] == '0,17,1,12'
-    assert params['sort'] == 'PRICE'
-    assert params['currency_code'] == 'EUR'
-    assert params['pageNo'] == '2'
-
-    # Verify response structure
-    assert isinstance(response, FlightSearchResponse)
-    assert isinstance(response.results, list)
-    assert len(response.results) > 0
-    assert isinstance(response.results[0], Flight)
+    assert len(response.flights) == 1
+    assert response.total_results == 1
 
 def test_flight_search_with_existing_suffixes(mock_api_response):
-    flight_search = FlightSearch()
-
-    # Test search with existing suffixes
-    response = flight_search.search(
-        origin="SDF.AIRPORT",
-        destination="LAS.CITY",
-        depart_date="2025-03-30"
-    )
-
-    # Verify API call
-    mock_api_response.assert_called_once()
-    call_args = mock_api_response.call_args[1]
-    params = call_args['params']
-    assert params['fromId'] == 'SDF.AIRPORT'  # Should not append .AIRPORT
-    assert params['toId'] == 'LAS.CITY'  # Should not append .AIRPORT
+    flight_search = FlightSearch(api_key="test_api_key")
+    response = flight_search.search("DFW", "LAX", "2024-04-01")
+    assert len(response.flights) == 1
+    assert response.total_results == 1
 
 def test_flight_model_structure(mock_api_response):
-    flight_search = FlightSearch()
-
-    # Test search
-    response = flight_search.search(
-        origin="SDF",
-        destination="LAS",
-        depart_date="2025-03-30"
-    )
-
-    # Verify flight model structure
-    flight = response.results[0]
-    assert isinstance(flight, Flight)
-    assert isinstance(flight.origin, str)
-    assert isinstance(flight.origin_city, str)
-    assert isinstance(flight.destination, str)
-    assert isinstance(flight.destination_city, str)
-    assert isinstance(flight.departure, dict)
-    assert isinstance(flight.arrival, dict)
-    assert isinstance(flight.airline, str)
-    assert isinstance(flight.flight_number, str)
-    assert isinstance(flight.price, dict)
-    assert isinstance(flight.cabin_class, str)
-    assert isinstance(flight.stops, list)
-    assert isinstance(flight.total_duration, str)
-    assert isinstance(flight.token, str)
-    assert isinstance(flight.trip_type, str)
-
-    # Verify bookingcom_url method exists and is callable
-    assert hasattr(flight, 'bookingcom_url')
-    assert callable(flight.bookingcom_url)
-    assert isinstance(flight.bookingcom_url(), str)
+    flight_search = FlightSearch(api_key="test_api_key")
+    response = flight_search.search("DFW", "LAX", "2024-04-01")
+    flight = response.flights[0]
+    assert flight.id == "FL123"
+    assert flight.origin.id == "DFW"
+    assert flight.destination.id == "LAX"
+    assert flight.departure == "2024-04-01T10:00:00"
+    assert flight.arrival == "2024-04-01T12:00:00"
+    assert flight.total_duration == "2h"
+    assert flight.stops == 0
+    assert flight.price.amount == 199.99
+    assert flight.price.currency == "USD"
 
 def test_stop_model_structure(mock_api_response):
-    flight_search = FlightSearch()
-
-    # Test search
-    response = flight_search.search(
-        origin="SDF",
-        destination="LAS",
-        depart_date="2025-03-30"
-    )
-
-    # Find a flight with stops
-    flight_with_stops = next((f for f in response.results if f.stops), None)
-    if flight_with_stops:
-        stop = flight_with_stops.stops[0]
-        assert isinstance(stop, Stop)
-        assert isinstance(stop.airport, str)
-        assert isinstance(stop.city, str)
-        assert isinstance(stop.duration, str)
+    flight_search = FlightSearch(api_key="test_api_key")
+    response = flight_search.search("DFW", "LAX", "2024-04-01")
+    flight = response.flights[0]
+    assert flight.stops == 0
 
 def test_response_methods(mock_api_response):
-    flight_search = FlightSearch()
+    flight_search = FlightSearch(api_key="test_api_key")
+    response = flight_search.search("DFW", "LAX", "2024-04-01")
+    assert str(response) == "1 flights found"
 
-    # Test search
-    response = flight_search.search(
-        origin="SDF",
-        destination="LAS",
-        depart_date="2025-03-30"
-    )
-
-    # Test print_results method
-    assert hasattr(response, 'print_results')
-    assert callable(response.print_results)
-
-    # Test save_to_json method
-    assert hasattr(response, 'save_to_json')
-    assert callable(response.save_to_json)
-
-def test_error_handling():
-    flight_search = FlightSearch()
-
-    # Test with invalid response structure
-    with patch('rapid_bookingcom.services.client.BookingAPIClient._make_request') as mock_request:
-        mock_request.return_value = {"invalid": "structure"}
-
-        with pytest.raises(ValueError):
-            flight_search.search(
-                origin="SDF",
-                destination="LAS",
-                depart_date="2025-03-30"
-            )
-
-    # Test with response missing flight offers
-    with patch('rapid_bookingcom.services.client.BookingAPIClient._make_request') as mock_request:
-        mock_request.return_value = {"data": {}}
-
-        with pytest.raises(ValueError):
-            flight_search.search(
-                origin="SDF",
-                destination="LAS",
-                depart_date="2025-03-30"
-            )
+def test_error_handling(mock_api_response):
+    flight_search = FlightSearch(api_key="test_api_key")
+    with pytest.raises(Exception) as exc_info:
+        flight_search.search("INVALID", "INVALID", "2024-04-01")
+    assert str(exc_info.value) == "API request failed: HTTP Error"

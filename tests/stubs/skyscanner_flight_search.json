@@ -1,0 +1,37 @@
+{
+  "status": true,
+  "timestamp": 1742949930220,
+  "sessionId": "",
+  "data": {
+    "context": {
+      "status": "failure",
+      "sessionId": "Cg8IARILCgIQAxC7qKX_3DISKHVzc18xZTU3OWQ5NC02ODg4LTQyODItYTRhMC1iZjdhYTk1OWVlMjIiAlVT",
+      "totalResults": 0
+    },
+    "itineraries": [],
+    "messages": [],
+    "filterStats": {
+      "duration": {
+        "min": 0,
+        "max": 0,
+        "multiCityMin": 0,
+        "multiCityMax": 0
+      },
+      "airports": [],
+      "carriers": [],
+      "stopPrices": {
+        "direct": {
+          "isPresent": false
+        },
+        "one": {
+          "isPresent": false
+        },
+        "twoOrMore": {
+          "isPresent": false
+        }
+      }
+    },
+    "flightsSessionId": "",
+    "destinationImageUrl": "https://content.skyscnr.com/m/3719e8f4a5daf43d/original/Flights-Placeholder.jpg"
+  }
+}

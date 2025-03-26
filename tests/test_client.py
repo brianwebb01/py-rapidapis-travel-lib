@@ -1,11 +1,11 @@
 import pytest
 from unittest.mock import patch, MagicMock
-from rapid_bookingcom.services.client import BookingAPIClient
+from skyscanner_travel.services.skyscanner_client import SkyscannerClient
 import requests
 
 @pytest.fixture
 def client():
-    return BookingAPIClient()
+    return SkyscannerClient(api_key="test_api_key")
 
 def test_client_initialization(client):
     """Test that the client is initialized with correct attributes"""

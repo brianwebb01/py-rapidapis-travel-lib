@@ -1,0 +1,206 @@
+{
+  "status": true,
+  "timestamp": 1742949924452,
+  "data": [
+    {
+      "skyId": "LASA",
+      "entityId": "27542715",
+      "presentation": {
+        "title": "Las Vegas",
+        "suggestionTitle": "Las Vegas (Any)",
+        "subtitle": "United States"
+      },
+      "navigation": {
+        "entityId": "27542715",
+        "entityType": "CITY",
+        "localizedName": "Las Vegas",
+        "relevantFlightParams": {
+          "skyId": "LASA",
+          "entityId": "27542715",
+          "flightPlaceType": "CITY",
+          "localizedName": "Las Vegas"
+        },
+        "relevantHotelParams": {
+          "entityId": "27542715",
+          "entityType": "CITY",
+          "localizedName": "Las Vegas"
+        }
+      }
+    },
+    {
+      "skyId": "LAS",
+      "entityId": "95673753",
+      "presentation": {
+        "title": "Las Vegas Harry Reid International",
+        "suggestionTitle": "Las Vegas Harry Reid International (LAS)",
+        "subtitle": "United States"
+      },
+      "navigation": {
+        "entityId": "95673753",
+        "entityType": "AIRPORT",
+        "localizedName": "Las Vegas Harry Reid International",
+        "relevantFlightParams": {
+          "skyId": "LAS",
+          "entityId": "95673753",
+          "flightPlaceType": "AIRPORT",
+          "localizedName": "Las Vegas Harry Reid International"
+        },
+        "relevantHotelParams": {
+          "entityId": "27542715",
+          "entityType": "CITY",
+          "localizedName": "Las Vegas"
+        }
+      }
+    },
+    {
+      "skyId": "VGT",
+      "entityId": "129055974",
+      "presentation": {
+        "title": "Las Vegas North Air Terminal",
+        "suggestionTitle": "Las Vegas North Air Terminal (VGT)",
+        "subtitle": "United States"
+      },
+      "navigation": {
+        "entityId": "129055974",
+        "entityType": "AIRPORT",
+        "localizedName": "Las Vegas North Air Terminal",
+        "relevantFlightParams": {
+          "skyId": "VGT",
+          "entityId": "129055974",
+          "flightPlaceType": "AIRPORT",
+          "localizedName": "Las Vegas North Air Terminal"
+        },
+        "relevantHotelParams": {
+          "entityId": "27542715",
+          "entityType": "CITY",
+          "localizedName": "Las Vegas"
+        }
+      }
+    },
+    {
+      "skyId": "HSH",
+      "entityId": "129054447",
+      "presentation": {
+        "title": "Las Vegas Henderson Sky Harbor",
+        "suggestionTitle": "Las Vegas Henderson Sky Harbor (HSH)",
+        "subtitle": "United States"
+      },
+      "navigation": {
+        "entityId": "129054447",
+        "entityType": "AIRPORT",
+        "localizedName": "Las Vegas Henderson Sky Harbor",
+        "relevantFlightParams": {
+          "skyId": "HSH",
+          "entityId": "129054447",
+          "flightPlaceType": "AIRPORT",
+          "localizedName": "Las Vegas Henderson Sky Harbor"
+        },
+        "relevantHotelParams": {
+          "entityId": "27542715",
+          "entityType": "CITY",
+          "localizedName": "Las Vegas"
+        }
+      }
+    },
+    {
+      "skyId": "SDQ",
+      "entityId": "95673336",
+      "presentation": {
+        "title": "Santo Domingo Las Americas",
+        "suggestionTitle": "Santo Domingo Las Americas (SDQ)",
+        "subtitle": "Dominican Republic"
+      },
+      "navigation": {
+        "entityId": "95673336",
+        "entityType": "AIRPORT",
+        "localizedName": "Santo Domingo Las Americas",
+        "relevantFlightParams": {
+          "skyId": "SDQ",
+          "entityId": "95673336",
+          "flightPlaceType": "AIRPORT",
+          "localizedName": "Santo Domingo Las Americas"
+        },
+        "relevantHotelParams": {
+          "entityId": "27543019",
+          "entityType": "CITY",
+          "localizedName": "Santo Domingo"
+        }
+      }
+    },
+    {
+      "skyId": "LKI",
+      "entityId": "216767003",
+      "presentation": {
+        "title": "Lasikin",
+        "suggestionTitle": "Lasikin (LKI)",
+        "subtitle": "Indonesia"
+      },
+      "navigation": {
+        "entityId": "216767003",
+        "entityType": "AIRPORT",
+        "localizedName": "Lasikin",
+        "relevantFlightParams": {
+          "skyId": "LKI",
+          "entityId": "216767003",
+          "flightPlaceType": "AIRPORT",
+          "localizedName": "Lasikin"
+        },
+        "relevantHotelParams": {
+          "entityId": "45353336",
+          "entityType": "CITY",
+          "localizedName": "Sinabang"
+        }
+      }
+    },
+    {
+      "skyId": "LSP",
+      "entityId": "128667787",
+      "presentation": {
+        "title": "Las Piedras",
+        "suggestionTitle": "Las Piedras (LSP)",
+        "subtitle": "Venezuela"
+      },
+      "navigation": {
+        "entityId": "128667787",
+        "entityType": "AIRPORT",
+        "localizedName": "Las Piedras",
+        "relevantFlightParams": {
+          "skyId": "LSP",
+          "entityId": "128667787",
+          "flightPlaceType": "AIRPORT",
+          "localizedName": "Las Piedras"
+        },
+        "relevantHotelParams": {
+          "entityId": "27544157",
+          "entityType": "CITY",
+          "localizedName": "Las Piedras"
+        }
+      }
+    },
+    {
+      "skyId": "LRU",
+      "entityId": "129054021",
+      "presentation": {
+        "title": "Las Cruces",
+        "suggestionTitle": "Las Cruces (LRU)",
+        "subtitle": "United States"
+      },
+      "navigation": {
+        "entityId": "129054021",
+        "entityType": "AIRPORT",
+        "localizedName": "Las Cruces",
+        "relevantFlightParams": {
+          "skyId": "LRU",
+          "entityId": "129054021",
+          "flightPlaceType": "AIRPORT",
+          "localizedName": "Las Cruces"
+        },
+        "relevantHotelParams": {
+          "entityId": "27544150",
+          "entityType": "CITY",
+          "localizedName": "Las Cruces"
+        }
+      }
+    }
+  ]
+}
