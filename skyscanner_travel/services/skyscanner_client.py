@@ -1,5 +1,6 @@
 import requests
 import json
+from datetime import datetime
 from typing import Dict, List, Optional, Any
 from ..models.flight import Flight
 from ..models.flight_response import FlightSearchResponse
@@ -171,17 +172,41 @@ class SkyscannerClient:
         }
         return self._make_request("v2/flights/searchFlights", params=params)
 
-    def get_flight_details(self, itinerary_id: str, session_id: str) -> Flight:
+
+    def get_flight_details(
+        self,
+        flight: Flight,
+        adults: int = 1,
+        children: int = 0,
+        infants: int = 0,
+        currency: str = "USD",
+        locale: str = "en-US",
+        market: str = "en-US",
+        cabinClass: str = "economy",
+        countryCode: str = "US"
+    ) -> Dict:
         """Get detailed information about a specific flight.
 
         Args:
-            itinerary_id (str): Itinerary ID from flight search
-            session_id (str): Session ID from flight search
+            flight (Flight): Flight object to get details for
 
         Returns:
-            Flight: Detailed flight information
+            Dict: API response containing flight details
         """
-        endpoint = f"v3/flights/details/{itinerary_id}"
-        params = {"session_id": session_id}
-        response = self._make_request(endpoint, params=params)
-        return Flight.from_api_response(response)
+        endpoint = f"v1/flights/getFlightDetails"
+        fl_date = datetime.fromisoformat(flight.departure['iso']).strftime("%Y-%m-%d")
+        legs = [{"destination": flight.destination.code, "origin": flight.origin.code, "date": fl_date}]
+        params = {
+            "itineraryId": flight.itinerary_id,
+            "legs": json.dumps(legs),
+            "sessionId": flight.session_id,
+            "adults": str(adults),
+            "children": str(children),
+            "infants": str(infants),
+            "currency": currency,
+            "locale": locale,
+            "market": market,
+            "cabinClass": cabinClass,
+            "countryCode": countryCode
+        }
+        return self._make_request(endpoint, params=params)

@@ -1,12 +1,12 @@
 {
   "status": true,
-  "timestamp": 1742949937097,
+  "timestamp": 1743015921988,
   "data": {
     "itinerary": {
-      "id": "16157-2503301340--31829-0-13411-2503301450",
+      "id": "16157-2503300800--31722-1-13411-2503301111",
       "legs": [
         {
-          "id": "16157-2503301340--31829-0-13411-2503301450",
+          "id": "16157-2503300800--31722-1-13411-2503301111",
           "origin": {
             "id": "16157",
             "name": "Louisville Muhammad Ali International",
@@ -21,7 +21,7 @@
           },
           "segments": [
             {
-              "id": "16157-13411-2503301340-2503301450--31829",
+              "id": "16157-10959-2503300800-2503300907--31722",
               "origin": {
                 "id": "16157",
                 "name": "Louisville Muhammad Ali International",
@@ -29,40 +29,106 @@
                 "city": "Louisville"
               },
               "destination": {
+                "id": "10959",
+                "name": "Denver International",
+                "displayCode": "DEN",
+                "city": "Denver"
+              },
+              "duration": 187,
+              "dayChange": 0,
+              "flightNumber": "UA2354",
+              "departure": "2025-03-30T08:00:00",
+              "arrival": "2025-03-30T09:07:00",
+              "marketingCarrier": {
+                "id": "-31722",
+                "name": "United",
+                "displayCode": "UA",
+                "displayCodeType": "IATA",
+                "brandColor": "#01376d",
+                "logo": "https://content.skyscnr.com/93c1426f8f7a93ab8191e521aae1d3d5/ai-template-united-thumb-1-xxxhdpi.png",
+                "altId": "UA"
+              },
+              "operatingCarrier": {
+                "id": "-31722",
+                "name": "United",
+                "displayCode": "UA",
+                "displayCodeType": "IATA",
+                "brandColor": "#01376d",
+                "logo": "https://content.skyscnr.com/93c1426f8f7a93ab8191e521aae1d3d5/ai-template-united-thumb-1-xxxhdpi.png",
+                "altId": "UA"
+              },
+              "goodToKnowItems": [
+                {
+                  "icon": "duration",
+                  "body": {
+                    "value": "<style0>1h 0m</style0> connection in airport",
+                    "isHighlighted": false,
+                    "position": 0
+                  }
+                }
+              ]
+            },
+            {
+              "id": "10959-13411-2503301007-2503301111--31722",
+              "origin": {
+                "id": "10959",
+                "name": "Denver International",
+                "displayCode": "DEN",
+                "city": "Denver"
+              },
+              "destination": {
                 "id": "13411",
                 "name": "Las Vegas Harry Reid International",
                 "displayCode": "LAS",
                 "city": "Las Vegas"
               },
-              "duration": 250,
+              "duration": 124,
               "dayChange": 0,
-              "flightNumber": "WN3109",
-              "departure": "2025-03-30T13:40:00",
-              "arrival": "2025-03-30T14:50:00",
+              "flightNumber": "UA604",
+              "departure": "2025-03-30T10:07:00",
+              "arrival": "2025-03-30T11:11:00",
               "marketingCarrier": {
-                "id": "-31829",
-                "name": "Southwest Airlines",
-                "displayCode": "WN",
+                "id": "-31722",
+                "name": "United",
+                "displayCode": "UA",
                 "displayCodeType": "IATA",
-                "brandColor": "#304CB2",
-                "logo": "https://content.skyscnr.com/7dc63f2f3fb0e9d10500b495eb7d87eb/ai-template-southwest-airlines-thumb-1-xxxhdpi.png",
-                "altId": "WN"
+                "brandColor": "#01376d",
+                "logo": "https://content.skyscnr.com/93c1426f8f7a93ab8191e521aae1d3d5/ai-template-united-thumb-1-xxxhdpi.png",
+                "altId": "UA"
               },
               "operatingCarrier": {
-                "id": "-31829",
-                "name": "Southwest Airlines",
-                "displayCode": "WN",
+                "id": "-31722",
+                "name": "United",
+                "displayCode": "UA",
                 "displayCodeType": "IATA",
-                "brandColor": "#304CB2",
-                "logo": "https://content.skyscnr.com/7dc63f2f3fb0e9d10500b495eb7d87eb/ai-template-southwest-airlines-thumb-1-xxxhdpi.png",
-                "altId": "WN"
+                "brandColor": "#01376d",
+                "logo": "https://content.skyscnr.com/93c1426f8f7a93ab8191e521aae1d3d5/ai-template-united-thumb-1-xxxhdpi.png",
+                "altId": "UA"
               }
             }
           ],
-          "duration": 250,
-          "stopCount": 0,
-          "departure": "2025-03-30T13:40:00",
-          "arrival": "2025-03-30T14:50:00",
+          "layovers": [
+            {
+              "segmentId": "16157-10959-2503300800-2503300907--31722",
+              "origin": {
+                "id": "10959",
+                "name": "Denver International",
+                "displayCode": "DEN",
+                "city": "Denver"
+              },
+              "destination": {
+                "id": "10959",
+                "name": "Denver International",
+                "displayCode": "DEN",
+                "city": "Denver"
+              },
+              "duration": 60
+            }
+          ],
+          "duration": 371,
+          "stopCount": 1,
+          "departure": "2025-03-30T08:00:00",
+          "arrival": "2025-03-30T11:11:00",
           "dayChange": 0
         }
       ],
@@ -70,20 +136,20 @@
         {
           "agents": [
             {
-              "id": "swa_",
-              "name": "Southwest Airlines",
+              "id": "uair",
+              "name": "United",
               "isCarrier": true,
               "bookingProposition": "PBOOK",
-              "url": "https://www.skyscanner.net/transport_deeplink/4.0/US/en-US/USD/swa_/1/16157.13411.2025-03-30/air/airli/flights?itinerary=flight|-31829|3109|16157|2025-03-30T13:40|13411|2025-03-30T14:50|250|WLN0P4Q|W|PLU&carriers=-31829&operators=-31829&passengers=1&channel=iphone&cabin_class=economy&fps_session_id=fae74729-71d7-4084-80a4-43ae480b3f97&is_npt=false&is_multipart=false&client_id=skyscanner_app&request_id=adb2fd4d-828c-3dab-e187-31697989db50&q_ids=H4sIAAAAAAAA_-OS4mIpLk-MF2LmmFsnxczxOEOhYfKi_WxGTAqMACD7p9QcAAAA|-5473719741490957552|2&q_sources=JACQUARD&commercial_filters=false&q_datetime_utc=2025-03-26T00:45:31&pqid=false",
-              "price": 578.48,
+              "url": "https://www.skyscanner.net/transport_deeplink/4.0/US/en-US/USD/uair/1/16157.13411.2025-03-30/air/airli/flights?itinerary=flight|-31722|2354|16157|2025-03-30T08:00|10959|2025-03-30T09:07|187|EAA0AZES|E|-;flight|-31722|604|10959|2025-03-30T10:07|13411|2025-03-30T11:11|124|EAA0AZES|E|-&carriers=-31722&operators=-31722;-31722&passengers=1&channel=iphone&cabin_class=economy&fps_session_id=d35e3350-7419-49b6-a7ff-614fc592cf7e&ticket_price=723.78&is_npt=false&is_multipart=false&client_id=skyscanner_app&request_id=f4d82a0b-f901-18c7-cd2b-072739f84798&q_ids=H4sIAAAAAAAA_-OS42IpTcwsEmLmmFsnxczxOEOhYfKi_WxGTAqMWUyhwQAcy5pxIAAAAA|5392210569120621534|2&q_sources=JACQUARD&commercial_filters=false&q_datetime_utc=2025-03-26T18:13:27&pqid=false",
+              "price": 723.78,
               "rating": {
-                "value": 4.99,
-                "count": 1969
+                "value": 4.88,
+                "count": 7441
               },
               "updateStatus": "PENDING",
               "segments": [
                 {
-                  "id": "16157-13411-2503301340-2503301450--31829",
+                  "id": "16157-10959-2503300800-2503300907--31722",
                   "origin": {
                     "id": "16157",
                     "name": "Louisville Muhammad Ali International",
@@ -91,53 +157,101 @@
                     "city": "Louisville"
                   },
                   "destination": {
+                    "id": "10959",
+                    "name": "Denver International",
+                    "displayCode": "DEN",
+                    "city": "Denver"
+                  },
+                  "duration": 187,
+                  "dayChange": 0,
+                  "flightNumber": "UA2354",
+                  "departure": "2025-03-30T08:00:00",
+                  "arrival": "2025-03-30T09:07:00",
+                  "marketingCarrier": {
+                    "id": "-31722",
+                    "name": "United",
+                    "displayCode": "UA",
+                    "displayCodeType": "IATA",
+                    "brandColor": "#01376d",
+                    "logo": "https://content.skyscnr.com/93c1426f8f7a93ab8191e521aae1d3d5/ai-template-united-thumb-1-xxxhdpi.png",
+                    "altId": "UA"
+                  },
+                  "operatingCarrier": {
+                    "id": "-31722",
+                    "name": "United",
+                    "displayCode": "UA",
+                    "displayCodeType": "IATA",
+                    "brandColor": "#01376d",
+                    "logo": "https://content.skyscnr.com/93c1426f8f7a93ab8191e521aae1d3d5/ai-template-united-thumb-1-xxxhdpi.png",
+                    "altId": "UA"
+                  },
+                  "goodToKnowItems": [
+                    {
+                      "icon": "duration",
+                      "body": {
+                        "value": "<style0>1h 0m</style0> connection in airport",
+                        "isHighlighted": false,
+                        "position": 0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "10959-13411-2503301007-2503301111--31722",
+                  "origin": {
+                    "id": "10959",
+                    "name": "Denver International",
+                    "displayCode": "DEN",
+                    "city": "Denver"
+                  },
+                  "destination": {
                     "id": "13411",
                     "name": "Las Vegas Harry Reid International",
                     "displayCode": "LAS",
                     "city": "Las Vegas"
                   },
-                  "duration": 250,
+                  "duration": 124,
                   "dayChange": 0,
-                  "flightNumber": "WN3109",
-                  "departure": "2025-03-30T13:40:00",
-                  "arrival": "2025-03-30T14:50:00",
+                  "flightNumber": "UA604",
+                  "departure": "2025-03-30T10:07:00",
+                  "arrival": "2025-03-30T11:11:00",
                   "marketingCarrier": {
-                    "id": "-31829",
-                    "name": "Southwest Airlines",
-                    "displayCode": "WN",
+                    "id": "-31722",
+                    "name": "United",
+                    "displayCode": "UA",
                     "displayCodeType": "IATA",
-                    "brandColor": "#304CB2",
-                    "logo": "https://content.skyscnr.com/7dc63f2f3fb0e9d10500b495eb7d87eb/ai-template-southwest-airlines-thumb-1-xxxhdpi.png",
-                    "altId": "WN"
+                    "brandColor": "#01376d",
+                    "logo": "https://content.skyscnr.com/93c1426f8f7a93ab8191e521aae1d3d5/ai-template-united-thumb-1-xxxhdpi.png",
+                    "altId": "UA"
                   },
                   "operatingCarrier": {
-                    "id": "-31829",
-                    "name": "Southwest Airlines",
-                    "displayCode": "WN",
+                    "id": "-31722",
+                    "name": "United",
+                    "displayCode": "UA",
                     "displayCodeType": "IATA",
-                    "brandColor": "#304CB2",
-                    "logo": "https://content.skyscnr.com/7dc63f2f3fb0e9d10500b495eb7d87eb/ai-template-southwest-airlines-thumb-1-xxxhdpi.png",
-                    "altId": "WN"
+                    "brandColor": "#01376d",
+                    "logo": "https://content.skyscnr.com/93c1426f8f7a93ab8191e521aae1d3d5/ai-template-united-thumb-1-xxxhdpi.png",
+                    "altId": "UA"
                   }
                 }
               ],
               "isDirectDBookUrl": false,
-              "quoteAge": 0
+              "quoteAge": 52
             }
           ],
-          "totalPrice": 578.48,
+          "totalPrice": 723.78,
           "fare": {
             "leg_details": []
           },
-          "id": "swTBGVu-c4H4"
+          "id": "z4nBlIElaqGU"
         }
       ],
       "isTransferRequired": false,
-      "destinationImage": "https://content.skyscnr.com/00576d2aa3f6283d67e85fa7f26be1ee/las-vegas.jpg",
+      "destinationImage": "https://content.skyscnr.com/1f79cb840230f5cbdf7dc5eef0b89bd5/GettyImages-178482220.jpg",
       "operatingCarrierSafetyAttributes": [
         {
-          "carrierID": "-31829",
-          "carrierName": "Southwest Airlines",
+          "carrierID": "-31722",
+          "carrierName": "United",
           "faceMasksCompulsory": null,
           "aircraftDeepCleanedDaily": null,
           "attendantsWearPPE": null,
@@ -149,6 +263,6 @@
       "flexibleTicketPolicies": []
     },
     "pollingCompleted": true,
-    "bookingSessionId": "fae74729-71d7-4084-80a4-43ae480b3f97"
+    "bookingSessionId": "d35e3350-7419-49b6-a7ff-614fc592cf7e"
   }
 }

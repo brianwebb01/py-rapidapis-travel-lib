@@ -130,87 +130,64 @@ def test_bookingcom_url_without_booking_url():
 def test_flight_from_api_response():
     # Test creating a Flight instance from API response
     api_response = {
-        'itinerary': {
-            'id': '16157-2503301340--31829-0-13411-2503301450',
-            'legs': [{
+        'data': {
+            'itineraries': [{
                 'id': '16157-2503301340--31829-0-13411-2503301450',
-                'origin': {
-                    'id': '16157',
-                    'name': 'Louisville Muhammad Ali International',
-                    'displayCode': 'SDF',
-                    'city': 'Louisville'
+                'price': {
+                    'raw': 578.48,
+                    'formatted': '$579',
+                    'pricingOptionId': 'swTBGVu-c4H4'
                 },
-                'destination': {
-                    'id': '13411',
-                    'name': 'Las Vegas Harry Reid International',
-                    'displayCode': 'LAS',
-                    'city': 'Las Vegas'
-                },
-                'segments': [{
-                    'id': '16157-13411-2503301340-2503301450--31829',
+                'legs': [{
+                    'id': '16157-2503301340--31829-0-13411-2503301450',
                     'origin': {
-                        'id': '16157',
+                        'entityId': '16157',
                         'name': 'Louisville Muhammad Ali International',
                         'displayCode': 'SDF',
-                        'city': 'Louisville'
+                        'city': 'Louisville',
+                        'country': 'United States'
                     },
                     'destination': {
-                        'id': '13411',
+                        'entityId': '13411',
                         'name': 'Las Vegas Harry Reid International',
                         'displayCode': 'LAS',
-                        'city': 'Las Vegas'
+                        'city': 'Las Vegas',
+                        'country': 'United States'
                     },
-                    'duration': 250,
-                    'dayChange': 0,
-                    'flightNumber': 'WN3109',
+                    'segments': [{
+                        'id': '16157-13411-2503301340-2503301450--31829',
+                        'origin': {
+                            'displayCode': 'SDF',
+                            'parent': {
+                                'name': 'Louisville'
+                            }
+                        },
+                        'destination': {
+                            'displayCode': 'LAS',
+                            'parent': {
+                                'name': 'Las Vegas'
+                            }
+                        },
+                        'departure': '2025-03-30T13:40:00',
+                        'arrival': '2025-03-30T14:50:00',
+                        'flightNumber': '3109',
+                        'marketingCarrier': {
+                            'name': 'Southwest Airlines'
+                        }
+                    }],
+                    'durationInMinutes': 250,
+                    'stopCount': 0,
                     'departure': '2025-03-30T13:40:00',
                     'arrival': '2025-03-30T14:50:00',
-                    'marketingCarrier': {
-                        'id': '-31829',
-                        'name': 'Southwest Airlines',
-                        'displayCode': 'WN',
-                        'displayCodeType': 'IATA',
-                        'brandColor': '#304CB2',
-                        'logo': 'https://content.skyscnr.com/7dc63f2f3fb0e9d10500b495eb7d87eb/ai-template-southwest-airlines-thumb-1-xxxhdpi.png',
-                        'altId': 'WN'
-                    },
-                    'operatingCarrier': {
-                        'id': '-31829',
-                        'name': 'Southwest Airlines',
-                        'displayCode': 'WN',
-                        'displayCodeType': 'IATA',
-                        'brandColor': '#304CB2',
-                        'logo': 'https://content.skyscnr.com/7dc63f2f3fb0e9d10500b495eb7d87eb/ai-template-southwest-airlines-thumb-1-xxxhdpi.png',
-                        'altId': 'WN'
+                    'carriers': {
+                        'marketing': [{
+                            'name': 'Southwest Airlines'
+                        }]
                     }
-                }],
-                'duration': 250,
-                'stopCount': 0,
-                'departure': '2025-03-30T13:40:00',
-                'arrival': '2025-03-30T14:50:00',
-                'dayChange': 0
-            }],
-            'pricingOptions': [{
-                'agents': [{
-                    'id': 'swa_',
-                    'name': 'Southwest Airlines',
-                    'isCarrier': True,
-                    'bookingProposition': 'PBOOK',
-                    'url': 'https://www.skyscanner.net/transport_deeplink/4.0/US/en-US/USD/swa_/1/16157.13411.2025-03-30/air/airli/flights?itinerary=flight|-31829|3109|16157|2025-03-30T13:40|13411|2025-03-30T14:50|250|WLN0P4Q|W|PLU&carriers=-31829&operators=-31829&passengers=1&channel=iphone&cabin_class=economy&fps_session_id=fae74729-71d7-4084-80a4-43ae480b3f97&is_npt=false&is_multipart=false&client_id=skyscanner_app&request_id=adb2fd4d-828c-3dab-e187-31697989db50&q_ids=H4sIAAAAAAAA_-OS4mIpLk-MF2LmmFsnxczxOEOhYfKi_WxGTAqMACD7p9QcAAAA|-5473719741490957552|2&q_sources=JACQUARD&commercial_filters=false&q_datetime_utc=2025-03-26T00:45:31&pqid=false',
-                    'price': 578.48,
-                    'rating': {
-                        'value': 4.99,
-                        'count': 1969
-                    },
-                    'updateStatus': 'PENDING'
-                }],
-                'totalPrice': 578.48,
-                'fare': {
-                    'leg_details': []
-                },
-                'id': 'swTBGVu-c4H4'
+                }]
             }]
-        }
+        },
+        'sessionId': 'fae74729-71d7-4084-80a4-43ae480b3f97'
     }
 
     flight = Flight.from_api_response(api_response)
@@ -224,12 +201,11 @@ def test_flight_from_api_response():
     assert flight.arrival['date'] == 'Sunday, March 30'
     assert flight.arrival['time'] == '02:50pm'
     assert flight.airline == 'Southwest Airlines'
-    assert flight.flight_number == 'WN3109'
+    assert flight.flight_number == '3109'
     assert flight.price.amount == 578.48
     assert flight.price.currency == 'USD'
     assert flight.cabin_class == 'ECONOMY'
     assert flight.stops == []
     assert flight.total_duration == '4h 10m'
     assert flight.itinerary_id == '16157-2503301340--31829-0-13411-2503301450'
-    assert flight.booking_url is not None
-    assert 'skyscanner.net/transport_deeplink' in flight.booking_url
+    assert flight.booking_url is None

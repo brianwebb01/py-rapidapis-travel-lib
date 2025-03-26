@@ -18,7 +18,7 @@ class FlightSearchResponse(BaseModel):
         print(f"\nFound {self.total_results} flights:")
         for i, flight in enumerate(self.flights, 1):
             print(f"\n{i}. {flight.airline} {flight.flight_number}")
-            #print(f"   ID: {flight.id} Session ID: {flight.session_id}")
+            print(f"   ID: {flight.id} Session ID: {flight.session_id}")
             print(f"   From: {flight.origin_city} ({flight.origin.code})")
             print(f"   To: {flight.destination_city} ({flight.destination.code})")
             print(f"   Departure: {flight.departure['date']} at {flight.departure['time']}")
