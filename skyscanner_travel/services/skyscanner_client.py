@@ -19,7 +19,7 @@ class SkyscannerClient:
             raise ValueError("API key cannot be empty")
         self.api_key = api_key
         self.api_host = "sky-scrapper.p.rapidapi.com"
-        self.base_url = f"https://{self.api_host}/api/v1"
+        self.base_url = f"https://{self.api_host}/api"
         self.headers = {
             "x-rapidapi-key": self.api_key,
             "x-rapidapi-host": self.api_host
@@ -59,13 +59,28 @@ class SkyscannerClient:
         Returns:
             Dict: API response containing location results
         """
-        endpoint = "flights/searchAirport"
+        endpoint = "v1/flights/searchAirport"
         params = {"query": query, "locale": locale}
         try:
             response = self._make_request(endpoint, params=params)
             if isinstance(response, dict):
                 if 'data' in response:
-                    return response
+                    # Convert the new format to our standard format
+                    locations = []
+                    for item in response['data']:
+                        location = {
+                            'id': item.get('entityId', ''),
+                            'code': item.get('skyId', ''),
+                            'name': item.get('presentation', {}).get('title', ''),
+                            'type': item.get('navigation', {}).get('entityType', ''),
+                            'city_name': item.get('presentation', {}).get('title', ''),
+                            'region_name': '',  # Not available in v1 response
+                            'country_name': item.get('presentation', {}).get('subtitle', ''),
+                            'distance_to_city_value': None,  # Not available in v1 response
+                            'distance_to_city_unit': None   # Not available in v1 response
+                        }
+                        locations.append(location)
+                    return {'data': locations}
                 elif 'places' in response:
                     # Convert places format to locations format
                     locations = []
@@ -108,30 +123,53 @@ class SkyscannerClient:
 
     def search_flights(
         self,
-        origin: str,
-        destination: str,
-        departure_date: str,
-        return_date: Optional[str] = None,
+        origin_sky_id: str,
+        destination_sky_id: str,
+        origin_entity_id: str,
+        destination_entity_id: str,
+        date: str,
+        cabin_class: str = "economy",
         adults: int = 1,
-        cabin_class: str = "ECONOMY",
+        children: int = 0,
+        infants: int = 0,
         currency: str = "USD",
-        market: str = "US",
-        locale: str = "en-US",
+        market: str = "en-US",
         country_code: str = "US"
     ) -> Dict:
+        """Search for available flights.
+
+        Args:
+            origin_sky_id (str): Origin airport Sky ID (e.g. "SDF")
+            destination_sky_id (str): Destination airport Sky ID (e.g. "LAS")
+            origin_entity_id (str): Origin airport entity ID
+            destination_entity_id (str): Destination airport entity ID
+            date (str): Departure date in YYYY-MM-DD format
+            cabin_class (str): Cabin class (default: economy)
+            adults (int): Number of adult passengers
+            children (int): Number of child passengers
+            infants (int): Number of infant passengers
+            currency (str): Currency code (default: USD)
+            market (str): Market code (default: en-US)
+            country_code (str): Country code (default: US)
+
+        Returns:
+            Dict: API response containing flight results
+        """
         params = {
-            "origin": origin,
-            "destination": destination,
-            "departure_date": departure_date,
-            "return_date": return_date,
-            "adults": adults,
-            "cabin_class": cabin_class,
+            "originSkyId": origin_sky_id,
+            "destinationSkyId": destination_sky_id,
+            "originEntityId": origin_entity_id,
+            "destinationEntityId": destination_entity_id,
+            "date": date,
+            "cabinClass": cabin_class,
+            "adults": str(adults),
+            "childrens": str(children),
+            "infants": str(infants),
             "currency": currency,
             "market": market,
-            "locale": locale,
-            "country_code": country_code
+            "countryCode": country_code
         }
-        return self._make_request("GET", "/flights/search", params=params)
+        return self._make_request("v2/flights/searchFlights", params=params)
 
     def get_flight_details(self, itinerary_id: str, session_id: str) -> Flight:
         """Get detailed information about a specific flight.
@@ -143,7 +181,7 @@ class SkyscannerClient:
         Returns:
             Flight: Detailed flight information
         """
-        endpoint = f"flights/v3/details/{itinerary_id}"
+        endpoint = f"v3/flights/details/{itinerary_id}"
         params = {"session_id": session_id}
         response = self._make_request(endpoint, params=params)
         return Flight.from_api_response(response)

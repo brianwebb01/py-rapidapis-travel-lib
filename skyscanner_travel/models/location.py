@@ -1,12 +1,14 @@
 from typing import Dict, Optional, Any
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 class Location(BaseModel):
     """Model representing a location (airport, city) from the API."""
+    model_config = ConfigDict(populate_by_name=True)
+
     entity_id: str = Field(alias="entityId")
     code: str = Field(alias="skyId")
     name: str
-    type: str = Field(alias="entityType")
+    type: str = Field(alias="type")
     city_name: Optional[str] = None
     region_name: Optional[str] = None
     country_name: Optional[str] = None
@@ -17,21 +19,43 @@ class Location(BaseModel):
     def from_api_response(cls, data: Dict[str, Any]) -> Optional["Location"]:
         """Create a Location instance from API response data."""
         try:
-            # Extract data from the nested structure
-            presentation = data.get("presentation", {})
-            navigation = data.get("navigation", {})
+            # Extract entity ID and code
+            entity_id = data.get("entityId", "") or data.get("id", "")
+            code = data.get("displayCode", "") or data.get("code", "")
+            if not code and entity_id:
+                code = entity_id.split(".")[0]
+
+            # Extract city name
+            city_name = data.get("city", {}).get("name", "") or data.get("city_name", "")
+            if not city_name and data.get("type") == "CITY":
+                city_name = data.get("name", "")
+
+            # Extract region and country names
+            region_name = data.get("region", {}).get("name", "") or data.get("region_name", "")
+            country_name = data.get("country", {}).get("name", "") or data.get("country_name", "")
+
+            # Extract distance to city if available
+            distance_to_city = data.get("distanceToCity", None)
+            distance_to_city_value = None
+            distance_to_city_unit = None
+            if distance_to_city:
+                distance_to_city_value = distance_to_city.get("value")
+                distance_to_city_unit = distance_to_city.get("unit")
+            else:
+                distance_to_city_value = data.get("distance_to_city_value")
+                distance_to_city_unit = data.get("distance_to_city_unit")
 
             # Create location data dictionary
             location_data = {
-                "entityId": data.get("entityId", ""),
-                "skyId": data.get("skyId", ""),
-                "name": presentation.get("title", ""),
-                "entityType": navigation.get("entityType", ""),
-                "city_name": navigation.get("localizedName", ""),
-                "region_name": None,  # Not available in current API response
-                "country_name": presentation.get("subtitle", ""),
-                "distance_to_city_value": None,  # Not available in current API response
-                "distance_to_city_unit": None  # Not available in current API response
+                "entityId": entity_id,
+                "skyId": code,
+                "name": data.get("name", ""),
+                "type": data.get("type", ""),
+                "city_name": city_name,
+                "region_name": region_name,
+                "country_name": country_name,
+                "distance_to_city_value": distance_to_city_value,
+                "distance_to_city_unit": distance_to_city_unit
             }
 
             return cls(**location_data)

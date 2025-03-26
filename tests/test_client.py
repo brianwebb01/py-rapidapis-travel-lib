@@ -11,7 +11,7 @@ def test_client_initialization(client):
     """Test that the client is initialized with correct attributes"""
     assert client.api_key is not None
     assert client.api_host is not None
-    assert client.base_url == f"https://{client.api_host}/api/v1"
+    assert client.base_url == f"https://{client.api_host}/api"
     assert client.headers == {
         "x-rapidapi-key": client.api_key,
         "x-rapidapi-host": client.api_host

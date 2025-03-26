@@ -9,7 +9,7 @@ class Price(BaseModel):
     currency: str
 
     def __str__(self) -> str:
-        return f"{self.amount} {self.currency}"
+        return f"{self.amount:.2f} {self.currency}"
 
     def __getitem__(self, key):
         return getattr(self, key)
@@ -37,6 +37,7 @@ class Flight(BaseModel):
     total_duration: str
     itinerary_id: str
     booking_url: Optional[str] = None
+    session_id: Optional[str] = None
 
     def __str__(self) -> str:
         departure_time = self.departure['time'] if isinstance(self.departure, dict) else self.departure
@@ -48,47 +49,88 @@ class Flight(BaseModel):
         itinerary = response['itinerary']
         leg = itinerary['legs'][0]
         segment = leg['segments'][0]
+
+        # Format departure and arrival times
         departure_time = datetime.strptime(segment['departure'], '%Y-%m-%dT%H:%M:%S')
         arrival_time = datetime.strptime(segment['arrival'], '%Y-%m-%dT%H:%M:%S')
 
-        origin_code = segment['origin']['displayCode']
-        destination_code = segment['destination']['displayCode']
+        # Format duration
+        duration_minutes = leg.get('duration', 0)
+        hours = duration_minutes // 60
+        minutes = duration_minutes % 60
+        duration_str = f"{hours}h {minutes}m" if hours > 0 else f"{minutes}m"
 
-        # Extract booking URL from pricing options if available
-        booking_url = None
-        if 'pricingOptions' in itinerary and itinerary['pricingOptions']:
-            # Get the first pricing option's first agent's URL
-            first_option = itinerary['pricingOptions'][0]
-            if isinstance(first_option, list) and first_option and isinstance(first_option[0], dict):
-                agents = first_option[0].get('agents', [])
-                if agents and isinstance(agents, list) and agents[0].get('url'):
-                    booking_url = agents[0]['url']
+        # Get origin and destination details
+        origin = segment['origin']
+        destination = segment['destination']
+
+        # Get price and booking URL from itinerary
+        pricing_option = itinerary.get('pricingOptions', [{}])[0]
+        agent = pricing_option.get('agents', [{}])[0]
+        price_amount = float(agent.get('price', 0))
+        price_currency = "USD"  # Default to USD as per API response
+        booking_url = agent.get('url', '')
+
+        # Get city names from the API response
+        origin_city = origin.get('city', '')
+        destination_city = destination.get('city', '')
+
+        # Get stops information
+        stops = []
+        if leg.get('stopCount', 0) > 0:
+            for stop in leg.get('stops', []):
+                stops.append(Stop(
+                    airport=stop.get('displayCode', ''),
+                    city=stop.get('city', {}).get('name', ''),
+                    duration=stop.get('duration', '')
+                ))
 
         return cls(
             id=itinerary.get('id'),
-            origin=origin_code,
-            origin_city=segment['origin']['city'],
-            destination=destination_code,
-            destination_city=segment['destination']['city'],
+            origin=Location(
+                entityId=origin.get('id', ''),
+                skyId=origin.get('displayCode', ''),
+                name=origin.get('name', ''),
+                type="AIRPORT",
+                city_name=origin_city,
+                region_name="",
+                country_name=origin.get('country', ''),
+                distance_to_city_value=None,
+                distance_to_city_unit=None
+            ),
+            origin_city=origin_city,
+            destination=Location(
+                entityId=destination.get('id', ''),
+                skyId=destination.get('displayCode', ''),
+                name=destination.get('name', ''),
+                type="AIRPORT",
+                city_name=destination_city,
+                region_name="",
+                country_name=destination.get('country', ''),
+                distance_to_city_value=None,
+                distance_to_city_unit=None
+            ),
+            destination_city=destination_city,
             departure={
-                'date': departure_time.strftime('%m/%d/%Y'),
-                'time': departure_time.strftime('%I:%M %p')
+                'date': departure_time.strftime('%A, %B %d'),
+                'time': departure_time.strftime('%I:%M%p').lower()
             },
             arrival={
-                'date': arrival_time.strftime('%m/%d/%Y'),
-                'time': arrival_time.strftime('%I:%M %p')
+                'date': arrival_time.strftime('%A, %B %d'),
+                'time': arrival_time.strftime('%I:%M%p').lower()
             },
-            airline=segment['carriers']['marketing'][0]['name'],
-            flight_number=segment['carriers']['marketing'][0]['code'],
+            airline=segment.get('marketingCarrier', {}).get('name', ''),
+            flight_number=segment.get('flightNumber', ''),
             price=Price(
-                amount=float(itinerary['pricingOptions'][0][0]['price']['amount']),
-                currency=itinerary['pricingOptions'][0][0]['price']['currency']
+                amount=price_amount,
+                currency=price_currency
             ),
             cabin_class=itinerary.get('cabinClass', 'ECONOMY'),
-            stops=len(leg['segments']) - 1,
-            total_duration=leg['duration'],
-            itinerary_id=itinerary['id'],
-            booking_url=booking_url
+            stops=stops,
+            total_duration=duration_str,
+            itinerary_id=itinerary.get('id', ''),
+            booking_url=booking_url,
+            session_id=response.get('sessionId', '')
         )
 
 class FlightSearchResponse(BaseModel):

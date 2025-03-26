@@ -22,7 +22,7 @@ def test_bookingcom_url():
     )
 
     # Get the booking URL
-    url = flight.bookingcom_url()
+    url = flight.booking_url
 
     # Verify the URL structure
     assert url.startswith('https://www.skyscanner.net/transport_deeplink/')
@@ -51,7 +51,7 @@ def test_bookingcom_url_with_different_cabin():
         booking_url='https://www.skyscanner.net/transport_deeplink/4.0/US/en-US/USD/swa_/1/16157.13411.2025-03-30/air/airli/flights?itinerary=flight|-31829|3109|16157|2025-03-30T13:40|13411|2025-03-30T14:50|250|WLN0P4Q|W|PLU&carriers=-31829&operators=-31829&passengers=1&channel=iphone&cabin_class=business&fps_session_id=fae74729-71d7-4084-80a4-43ae480b3f97&is_npt=false&is_multipart=false&client_id=skyscanner_app&request_id=adb2fd4d-828c-3dab-e187-31697989db50&q_ids=H4sIAAAAAAAA_-OS4mIpLk-MF2LmmFsnxczxOEOhYfKi_WxGTAqMACD7p9QcAAAA|-5473719741490957552|2&q_sources=JACQUARD&commercial_filters=false&q_datetime_utc=2025-03-26T00:45:31&pqid=false'
     )
 
-    url = flight.bookingcom_url()
+    url = flight.booking_url
     assert 'cabin_class=business' in url
 
 def test_bookingcom_url_without_booking_url():
@@ -72,19 +72,8 @@ def test_bookingcom_url_without_booking_url():
         itinerary_id='16157-2503301340--31829-0-13411-2503301450'
     )
 
-    url = flight.bookingcom_url()
-    assert url.startswith('https://flights.booking.com/flights/SDF.AIRPORT-LAS.AIRPORT/')
-    assert flight.itinerary_id in url
-    assert 'type=ONEWAY' in url
-    assert 'adults=1' in url
-    assert 'cabinClass=ECONOMY' in url
-    assert 'from=SDF.AIRPORT' in url
-    assert 'to=LAS.AIRPORT' in url
-    assert 'fromCountry=US' in url
-    assert 'toCountry=US' in url
-    assert 'depart=2025-03-30' in url
-    assert 'Louisville%20International%20Airport' in url
-    assert 'Las%20Vegas%20International%20Airport' in url
+    url = flight.booking_url
+    assert url is None
 
 def test_flight_from_api_response():
     # Test creating a Flight instance from API response
@@ -174,21 +163,21 @@ def test_flight_from_api_response():
 
     flight = Flight.from_api_response(api_response)
 
-    assert flight.origin == 'SDF'
+    assert flight.origin.code == 'SDF'
     assert flight.origin_city == 'Louisville'
-    assert flight.destination == 'LAS'
+    assert flight.destination.code == 'LAS'
     assert flight.destination_city == 'Las Vegas'
-    assert flight.departure['date'] == '03/30/2025'
-    assert flight.departure['time'] == '01:40 PM'
-    assert flight.arrival['date'] == '03/30/2025'
-    assert flight.arrival['time'] == '02:50 PM'
+    assert flight.departure['date'] == 'Sunday, March 30'
+    assert flight.departure['time'] == '01:40pm'
+    assert flight.arrival['date'] == 'Sunday, March 30'
+    assert flight.arrival['time'] == '02:50pm'
     assert flight.airline == 'Southwest Airlines'
     assert flight.flight_number == 'WN3109'
-    assert flight.price['amount'] == 578.48
-    assert flight.price['currency'] == 'USD'
+    assert flight.price.amount == 578.48
+    assert flight.price.currency == 'USD'
     assert flight.cabin_class == 'ECONOMY'
     assert flight.stops == []
-    assert flight.total_duration == '250m'
+    assert flight.total_duration == '4h 10m'
     assert flight.itinerary_id == '16157-2503301340--31829-0-13411-2503301450'
     assert flight.booking_url is not None
     assert 'skyscanner.net/transport_deeplink' in flight.booking_url

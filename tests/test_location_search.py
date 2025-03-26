@@ -74,7 +74,7 @@ def test_location_model_structure(mock_api_response):
     location_search = LocationSearch(api_key="test_api_key")
     response = location_search.search("Dallas")
     location = response.locations[0]
-    assert location.id == "DFW.CITY"
+    assert location.entity_id == "DFW.CITY"
     assert location.type == "CITY"
     assert location.name == "Dallas"
     assert location.city_name == "Dallas"
@@ -88,7 +88,7 @@ def test_location_search_success(mock_api_response):
     assert isinstance(response, LocationResponse)
     assert len(response.locations) == 1
     location = response.locations[0]
-    assert location.id == "DFW.CITY"
+    assert location.entity_id == "DFW.CITY"
     assert location.type == "CITY"
 
 def test_location_search_error(mock_api_error):
@@ -111,11 +111,15 @@ def test_location_search_response_printing(mock_api_response):
     sys.stdout = sys.__stdout__
 
     expected_output = """
-Available Locations:
-==================================================
+Found 1 locations:
 
-Location 1:
-Texas, United States
+1. Dallas
+   Code: DFW
+   Type: CITY
+   Entity ID: DFW.CITY
+   Country: United States
+   Region: Texas
+
 --------------------------------------------------
 """
     assert captured_output.getvalue() == expected_output
@@ -127,7 +131,12 @@ def test_location_search_response_printing_city(mock_api_response):
     # Mock print function
     with patch('builtins.print') as mock_print:
         response.print_results()
-        mock_print.assert_any_call("Texas, United States")
+        mock_print.assert_any_call("Dallas")
+        mock_print.assert_any_call("Code: DFW")
+        mock_print.assert_any_call("Type: CITY")
+        mock_print.assert_any_call("Entity ID: DFW.CITY")
+        mock_print.assert_any_call("Country: United States")
+        mock_print.assert_any_call("Region: Texas")
 
 def test_location_search_response_printing_airport_no_distance(mock_api_response):
     mock_api_response.return_value = {
@@ -147,4 +156,9 @@ def test_location_search_response_printing_airport_no_distance(mock_api_response
     # Mock print function
     with patch('builtins.print') as mock_print:
         response.print_results()
-        mock_print.assert_any_call("Dallas, Texas, United States")
+        mock_print.assert_any_call("Dallas Fort Worth International")
+        mock_print.assert_any_call("Code: DFW")
+        mock_print.assert_any_call("Type: AIRPORT")
+        mock_print.assert_any_call("Entity ID: DFW.AIRPORT")
+        mock_print.assert_any_call("Country: United States")
+        mock_print.assert_any_call("Region: Texas")

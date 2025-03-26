@@ -1,37 +1,1666 @@
 {
   "status": true,
-  "timestamp": 1742949930220,
-  "sessionId": "",
+  "timestamp": 1742993018633,
+  "sessionId": "95b3be61-3bd3-4401-84b8-5cf22d92cd03",
   "data": {
     "context": {
-      "status": "failure",
-      "sessionId": "Cg8IARILCgIQAxC7qKX_3DISKHVzc18xZTU3OWQ5NC02ODg4LTQyODItYTRhMC1iZjdhYTk1OWVlMjIiAlVT",
-      "totalResults": 0
+      "status": "incomplete",
+      "sessionId": "Cl0IARJZCk4KJDk1YjNiZTYxLTNiZDMtNDQwMS04NGI4LTVjZjIyZDkyY2QwMxACGiRjNzJiMzM3OC1jZDUyLTRhZGMtOTU5ZS0yYjY1MDJhZmQzY2YQ_Jrrk90yGAESKHVzc18zZDJmNjU5Ny03MTkxLTRlNjAtOWNlMi0zYThmOTFmMzg1ZjEiAlVT",
+      "totalResults": 10
     },
-    "itineraries": [],
+    "itineraries": [
+      {
+        "id": "16157-2503301340--31829-0-13411-2503301450",
+        "price": {
+          "raw": 528.48,
+          "formatted": "$529",
+          "pricingOptionId": "swTBGVu-c4H4"
+        },
+        "legs": [
+          {
+            "id": "16157-2503301340--31829-0-13411-2503301450",
+            "origin": {
+              "id": "SDF",
+              "entityId": "95673969",
+              "name": "Louisville Muhammad Ali International ",
+              "displayCode": "SDF",
+              "city": "Louisville",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "destination": {
+              "id": "LAS",
+              "entityId": "95673753",
+              "name": "Las Vegas Harry Reid International",
+              "displayCode": "LAS",
+              "city": "Las Vegas",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "durationInMinutes": 250,
+            "stopCount": 0,
+            "isSmallestStops": false,
+            "departure": "2025-03-30T13:40:00",
+            "arrival": "2025-03-30T14:50:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -31829,
+                  "alternateId": "WN",
+                  "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/WN.png",
+                  "name": "Southwest Airlines"
+                }
+              ],
+              "operationType": "fully_operated"
+            },
+            "segments": [
+              {
+                "id": "16157-13411-2503301340-2503301450--31829",
+                "origin": {
+                  "flightPlaceId": "SDF",
+                  "displayCode": "SDF",
+                  "parent": {
+                    "flightPlaceId": "SDFA",
+                    "displayCode": "SDF",
+                    "name": "Louisville",
+                    "type": "City"
+                  },
+                  "name": "Louisville Muhammad Ali International ",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "LAS",
+                  "displayCode": "LAS",
+                  "parent": {
+                    "flightPlaceId": "LASA",
+                    "displayCode": "LAS",
+                    "name": "Las Vegas",
+                    "type": "City"
+                  },
+                  "name": "Las Vegas Harry Reid International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T13:40:00",
+                "arrival": "2025-03-30T14:50:00",
+                "durationInMinutes": 250,
+                "flightNumber": "3109",
+                "marketingCarrier": {
+                  "id": -31829,
+                  "name": "Southwest Airlines",
+                  "alternateId": "WN",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -31829,
+                  "name": "Southwest Airlines",
+                  "alternateId": "WN",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              }
+            ]
+          }
+        ],
+        "isSelfTransfer": false,
+        "isProtectedSelfTransfer": false,
+        "farePolicy": {
+          "isChangeAllowed": false,
+          "isPartiallyChangeable": false,
+          "isCancellationAllowed": false,
+          "isPartiallyRefundable": false
+        },
+        "eco": {
+          "ecoContenderDelta": 18.926603
+        },
+        "fareAttributes": {},
+        "tags": [
+          "shortest"
+        ],
+        "isMashUp": false,
+        "hasFlexibleOptions": false,
+        "score": 0.999
+      },
+      {
+        "id": "16157-2503300703--31722-1-13411-2503301105",
+        "price": {
+          "raw": 496.48,
+          "formatted": "$497",
+          "pricingOptionId": "tvzaXMGSw7tF"
+        },
+        "legs": [
+          {
+            "id": "16157-2503300703--31722-1-13411-2503301105",
+            "origin": {
+              "id": "SDF",
+              "entityId": "95673969",
+              "name": "Louisville Muhammad Ali International ",
+              "displayCode": "SDF",
+              "city": "Louisville",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "destination": {
+              "id": "LAS",
+              "entityId": "95673753",
+              "name": "Las Vegas Harry Reid International",
+              "displayCode": "LAS",
+              "city": "Las Vegas",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "durationInMinutes": 422,
+            "stopCount": 1,
+            "isSmallestStops": false,
+            "departure": "2025-03-30T07:03:00",
+            "arrival": "2025-03-30T11:05:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -31722,
+                  "alternateId": "UA",
+                  "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/UA.png",
+                  "name": "United"
+                }
+              ],
+              "operating": [
+                {
+                  "id": -31528,
+                  "alternateId": "!\\",
+                  "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/%21%5C.png",
+                  "name": "Mesa Airlines DBA United Express"
+                }
+              ],
+              "operationType": "partially_operated"
+            },
+            "segments": [
+              {
+                "id": "16157-12389-2503300703-2503300845--31722",
+                "origin": {
+                  "flightPlaceId": "SDF",
+                  "displayCode": "SDF",
+                  "parent": {
+                    "flightPlaceId": "SDFA",
+                    "displayCode": "SDF",
+                    "name": "Louisville",
+                    "type": "City"
+                  },
+                  "name": "Louisville Muhammad Ali International ",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "IAH",
+                  "displayCode": "IAH",
+                  "parent": {
+                    "flightPlaceId": "HOUA",
+                    "displayCode": "HOU",
+                    "name": "Houston",
+                    "type": "City"
+                  },
+                  "name": "Houston George Bush Intercntl.",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T07:03:00",
+                "arrival": "2025-03-30T08:45:00",
+                "durationInMinutes": 162,
+                "flightNumber": "6266",
+                "marketingCarrier": {
+                  "id": -31722,
+                  "name": "United",
+                  "alternateId": "UA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -31528,
+                  "name": "Mesa Airlines DBA United Express",
+                  "alternateId": "!\\",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              },
+              {
+                "id": "12389-13411-2503300935-2503301105--31722",
+                "origin": {
+                  "flightPlaceId": "IAH",
+                  "displayCode": "IAH",
+                  "parent": {
+                    "flightPlaceId": "HOUA",
+                    "displayCode": "HOU",
+                    "name": "Houston",
+                    "type": "City"
+                  },
+                  "name": "Houston George Bush Intercntl.",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "LAS",
+                  "displayCode": "LAS",
+                  "parent": {
+                    "flightPlaceId": "LASA",
+                    "displayCode": "LAS",
+                    "name": "Las Vegas",
+                    "type": "City"
+                  },
+                  "name": "Las Vegas Harry Reid International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T09:35:00",
+                "arrival": "2025-03-30T11:05:00",
+                "durationInMinutes": 210,
+                "flightNumber": "1799",
+                "marketingCarrier": {
+                  "id": -31722,
+                  "name": "United",
+                  "alternateId": "UA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -31722,
+                  "name": "United",
+                  "alternateId": "UA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              }
+            ]
+          }
+        ],
+        "isSelfTransfer": false,
+        "isProtectedSelfTransfer": false,
+        "farePolicy": {
+          "isChangeAllowed": false,
+          "isPartiallyChangeable": false,
+          "isCancellationAllowed": false,
+          "isPartiallyRefundable": false
+        },
+        "fareAttributes": {},
+        "isMashUp": false,
+        "hasFlexibleOptions": false,
+        "score": 0.337203
+      },
+      {
+        "id": "16157-2503301850--31829-1-13411-2503302145",
+        "price": {
+          "raw": 471.18,
+          "formatted": "$472",
+          "pricingOptionId": "OTwC1JF0RQzD"
+        },
+        "legs": [
+          {
+            "id": "16157-2503301850--31829-1-13411-2503302145",
+            "origin": {
+              "id": "SDF",
+              "entityId": "95673969",
+              "name": "Louisville Muhammad Ali International ",
+              "displayCode": "SDF",
+              "city": "Louisville",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "destination": {
+              "id": "LAS",
+              "entityId": "95673753",
+              "name": "Las Vegas Harry Reid International",
+              "displayCode": "LAS",
+              "city": "Las Vegas",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "durationInMinutes": 355,
+            "stopCount": 1,
+            "isSmallestStops": false,
+            "departure": "2025-03-30T18:50:00",
+            "arrival": "2025-03-30T21:45:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -31829,
+                  "alternateId": "WN",
+                  "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/WN.png",
+                  "name": "Southwest Airlines"
+                }
+              ],
+              "operationType": "fully_operated"
+            },
+            "segments": [
+              {
+                "id": "16157-10959-2503301850-2503301950--31829",
+                "origin": {
+                  "flightPlaceId": "SDF",
+                  "displayCode": "SDF",
+                  "parent": {
+                    "flightPlaceId": "SDFA",
+                    "displayCode": "SDF",
+                    "name": "Louisville",
+                    "type": "City"
+                  },
+                  "name": "Louisville Muhammad Ali International ",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "DEN",
+                  "displayCode": "DEN",
+                  "parent": {
+                    "flightPlaceId": "DENA",
+                    "displayCode": "DEN",
+                    "name": "Denver",
+                    "type": "City"
+                  },
+                  "name": "Denver International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T18:50:00",
+                "arrival": "2025-03-30T19:50:00",
+                "durationInMinutes": 180,
+                "flightNumber": "3519",
+                "marketingCarrier": {
+                  "id": -31829,
+                  "name": "Southwest Airlines",
+                  "alternateId": "WN",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -31829,
+                  "name": "Southwest Airlines",
+                  "alternateId": "WN",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              },
+              {
+                "id": "10959-13411-2503302045-2503302145--31829",
+                "origin": {
+                  "flightPlaceId": "DEN",
+                  "displayCode": "DEN",
+                  "parent": {
+                    "flightPlaceId": "DENA",
+                    "displayCode": "DEN",
+                    "name": "Denver",
+                    "type": "City"
+                  },
+                  "name": "Denver International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "LAS",
+                  "displayCode": "LAS",
+                  "parent": {
+                    "flightPlaceId": "LASA",
+                    "displayCode": "LAS",
+                    "name": "Las Vegas",
+                    "type": "City"
+                  },
+                  "name": "Las Vegas Harry Reid International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T20:45:00",
+                "arrival": "2025-03-30T21:45:00",
+                "durationInMinutes": 120,
+                "flightNumber": "4579",
+                "marketingCarrier": {
+                  "id": -31829,
+                  "name": "Southwest Airlines",
+                  "alternateId": "WN",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -31829,
+                  "name": "Southwest Airlines",
+                  "alternateId": "WN",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              }
+            ]
+          }
+        ],
+        "isSelfTransfer": false,
+        "isProtectedSelfTransfer": false,
+        "farePolicy": {
+          "isChangeAllowed": false,
+          "isPartiallyChangeable": false,
+          "isCancellationAllowed": false,
+          "isPartiallyRefundable": false
+        },
+        "eco": {
+          "ecoContenderDelta": 19.6472
+        },
+        "fareAttributes": {},
+        "tags": [
+          "second_shortest"
+        ],
+        "isMashUp": false,
+        "hasFlexibleOptions": false,
+        "score": 0.339708
+      },
+      {
+        "id": "16157-2503300600--32385-1-13411-2503301000",
+        "price": {
+          "raw": 451.18,
+          "formatted": "$452",
+          "pricingOptionId": "yPzQp1XZHHmr"
+        },
+        "legs": [
+          {
+            "id": "16157-2503300600--32385-1-13411-2503301000",
+            "origin": {
+              "id": "SDF",
+              "entityId": "95673969",
+              "name": "Louisville Muhammad Ali International ",
+              "displayCode": "SDF",
+              "city": "Louisville",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "destination": {
+              "id": "LAS",
+              "entityId": "95673753",
+              "name": "Las Vegas Harry Reid International",
+              "displayCode": "LAS",
+              "city": "Las Vegas",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "durationInMinutes": 420,
+            "stopCount": 1,
+            "isSmallestStops": false,
+            "departure": "2025-03-30T06:00:00",
+            "arrival": "2025-03-30T10:00:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -32385,
+                  "alternateId": "DL",
+                  "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/DL.png",
+                  "name": "Delta"
+                }
+              ],
+              "operationType": "fully_operated"
+            },
+            "segments": [
+              {
+                "id": "16157-9596-2503300600-2503300727--32385",
+                "origin": {
+                  "flightPlaceId": "SDF",
+                  "displayCode": "SDF",
+                  "parent": {
+                    "flightPlaceId": "SDFA",
+                    "displayCode": "SDF",
+                    "name": "Louisville",
+                    "type": "City"
+                  },
+                  "name": "Louisville Muhammad Ali International ",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "ATL",
+                  "displayCode": "ATL",
+                  "parent": {
+                    "flightPlaceId": "ATLA",
+                    "displayCode": "ATL",
+                    "name": "Atlanta",
+                    "type": "City"
+                  },
+                  "name": "Atlanta Hartsfield-Jackson",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T06:00:00",
+                "arrival": "2025-03-30T07:27:00",
+                "durationInMinutes": 87,
+                "flightNumber": "3152",
+                "marketingCarrier": {
+                  "id": -32385,
+                  "name": "Delta",
+                  "alternateId": "DL",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -32385,
+                  "name": "Delta",
+                  "alternateId": "DL",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              },
+              {
+                "id": "9596-13411-2503300830-2503301000--32385",
+                "origin": {
+                  "flightPlaceId": "ATL",
+                  "displayCode": "ATL",
+                  "parent": {
+                    "flightPlaceId": "ATLA",
+                    "displayCode": "ATL",
+                    "name": "Atlanta",
+                    "type": "City"
+                  },
+                  "name": "Atlanta Hartsfield-Jackson",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "LAS",
+                  "displayCode": "LAS",
+                  "parent": {
+                    "flightPlaceId": "LASA",
+                    "displayCode": "LAS",
+                    "name": "Las Vegas",
+                    "type": "City"
+                  },
+                  "name": "Las Vegas Harry Reid International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T08:30:00",
+                "arrival": "2025-03-30T10:00:00",
+                "durationInMinutes": 270,
+                "flightNumber": "777",
+                "marketingCarrier": {
+                  "id": -32385,
+                  "name": "Delta",
+                  "alternateId": "DL",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -32385,
+                  "name": "Delta",
+                  "alternateId": "DL",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              }
+            ]
+          }
+        ],
+        "isSelfTransfer": false,
+        "isProtectedSelfTransfer": false,
+        "farePolicy": {
+          "isChangeAllowed": false,
+          "isPartiallyChangeable": false,
+          "isCancellationAllowed": false,
+          "isPartiallyRefundable": false
+        },
+        "eco": {
+          "ecoContenderDelta": 15.674811
+        },
+        "fareAttributes": {},
+        "isMashUp": false,
+        "hasFlexibleOptions": false,
+        "score": 0.366639
+      },
+      {
+        "id": "16157-2503300500--32573-1-13411-2503300917",
+        "price": {
+          "raw": 449.18,
+          "formatted": "$450",
+          "pricingOptionId": "nWnPIL2TC0hQ"
+        },
+        "legs": [
+          {
+            "id": "16157-2503300500--32573-1-13411-2503300917",
+            "origin": {
+              "id": "SDF",
+              "entityId": "95673969",
+              "name": "Louisville Muhammad Ali International ",
+              "displayCode": "SDF",
+              "city": "Louisville",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "destination": {
+              "id": "LAS",
+              "entityId": "95673753",
+              "name": "Las Vegas Harry Reid International",
+              "displayCode": "LAS",
+              "city": "Las Vegas",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "durationInMinutes": 437,
+            "stopCount": 1,
+            "isSmallestStops": false,
+            "departure": "2025-03-30T05:00:00",
+            "arrival": "2025-03-30T09:17:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -32573,
+                  "alternateId": "AA",
+                  "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/AA.png",
+                  "name": "American Airlines"
+                }
+              ],
+              "operationType": "fully_operated"
+            },
+            "segments": [
+              {
+                "id": "16157-10602-2503300500-2503300636--32573",
+                "origin": {
+                  "flightPlaceId": "SDF",
+                  "displayCode": "SDF",
+                  "parent": {
+                    "flightPlaceId": "SDFA",
+                    "displayCode": "SDF",
+                    "name": "Louisville",
+                    "type": "City"
+                  },
+                  "name": "Louisville Muhammad Ali International ",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "CLT",
+                  "displayCode": "CLT",
+                  "parent": {
+                    "flightPlaceId": "CLTA",
+                    "displayCode": "CLT",
+                    "name": "Charlotte",
+                    "type": "City"
+                  },
+                  "name": "Charlotte Douglas",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T05:00:00",
+                "arrival": "2025-03-30T06:36:00",
+                "durationInMinutes": 96,
+                "flightNumber": "2872",
+                "marketingCarrier": {
+                  "id": -32573,
+                  "name": "American Airlines",
+                  "alternateId": "AA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -32573,
+                  "name": "American Airlines",
+                  "alternateId": "AA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              },
+              {
+                "id": "10602-13411-2503300723-2503300917--32573",
+                "origin": {
+                  "flightPlaceId": "CLT",
+                  "displayCode": "CLT",
+                  "parent": {
+                    "flightPlaceId": "CLTA",
+                    "displayCode": "CLT",
+                    "name": "Charlotte",
+                    "type": "City"
+                  },
+                  "name": "Charlotte Douglas",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "LAS",
+                  "displayCode": "LAS",
+                  "parent": {
+                    "flightPlaceId": "LASA",
+                    "displayCode": "LAS",
+                    "name": "Las Vegas",
+                    "type": "City"
+                  },
+                  "name": "Las Vegas Harry Reid International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T07:23:00",
+                "arrival": "2025-03-30T09:17:00",
+                "durationInMinutes": 294,
+                "flightNumber": "830",
+                "marketingCarrier": {
+                  "id": -32573,
+                  "name": "American Airlines",
+                  "alternateId": "AA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -32573,
+                  "name": "American Airlines",
+                  "alternateId": "AA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              }
+            ]
+          }
+        ],
+        "isSelfTransfer": false,
+        "isProtectedSelfTransfer": false,
+        "farePolicy": {
+          "isChangeAllowed": false,
+          "isPartiallyChangeable": false,
+          "isCancellationAllowed": false,
+          "isPartiallyRefundable": false
+        },
+        "fareAttributes": {},
+        "isMashUp": false,
+        "hasFlexibleOptions": false,
+        "score": 0.344822
+      },
+      {
+        "id": "16157-2503301006--31722-1-13411-2503301502",
+        "price": {
+          "raw": 365.18,
+          "formatted": "$366",
+          "pricingOptionId": "OUb4OGr9En6A"
+        },
+        "legs": [
+          {
+            "id": "16157-2503301006--31722-1-13411-2503301502",
+            "origin": {
+              "id": "SDF",
+              "entityId": "95673969",
+              "name": "Louisville Muhammad Ali International ",
+              "displayCode": "SDF",
+              "city": "Louisville",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "destination": {
+              "id": "LAS",
+              "entityId": "95673753",
+              "name": "Las Vegas Harry Reid International",
+              "displayCode": "LAS",
+              "city": "Las Vegas",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "durationInMinutes": 476,
+            "stopCount": 1,
+            "isSmallestStops": false,
+            "departure": "2025-03-30T10:06:00",
+            "arrival": "2025-03-30T15:02:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -31722,
+                  "alternateId": "UA",
+                  "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/UA.png",
+                  "name": "United"
+                }
+              ],
+              "operating": [
+                {
+                  "id": -31525,
+                  "alternateId": "!ˆ",
+                  "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/%21%CB%86.png",
+                  "name": "Republic Airways DBA United Express"
+                }
+              ],
+              "operationType": "partially_operated"
+            },
+            "segments": [
+              {
+                "id": "16157-12387-2503301006-2503301143--31722",
+                "origin": {
+                  "flightPlaceId": "SDF",
+                  "displayCode": "SDF",
+                  "parent": {
+                    "flightPlaceId": "SDFA",
+                    "displayCode": "SDF",
+                    "name": "Louisville",
+                    "type": "City"
+                  },
+                  "name": "Louisville Muhammad Ali International ",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "IAD",
+                  "displayCode": "IAD",
+                  "parent": {
+                    "flightPlaceId": "WASA",
+                    "displayCode": "WAS",
+                    "name": "Washington D.C.",
+                    "type": "City"
+                  },
+                  "name": "Washington Dulles",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T10:06:00",
+                "arrival": "2025-03-30T11:43:00",
+                "durationInMinutes": 97,
+                "flightNumber": "3543",
+                "marketingCarrier": {
+                  "id": -31722,
+                  "name": "United",
+                  "alternateId": "UA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -31525,
+                  "name": "Republic Airways DBA United Express",
+                  "alternateId": "!ˆ",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              },
+              {
+                "id": "12387-13411-2503301245-2503301502--31722",
+                "origin": {
+                  "flightPlaceId": "IAD",
+                  "displayCode": "IAD",
+                  "parent": {
+                    "flightPlaceId": "WASA",
+                    "displayCode": "WAS",
+                    "name": "Washington D.C.",
+                    "type": "City"
+                  },
+                  "name": "Washington Dulles",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "LAS",
+                  "displayCode": "LAS",
+                  "parent": {
+                    "flightPlaceId": "LASA",
+                    "displayCode": "LAS",
+                    "name": "Las Vegas",
+                    "type": "City"
+                  },
+                  "name": "Las Vegas Harry Reid International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T12:45:00",
+                "arrival": "2025-03-30T15:02:00",
+                "durationInMinutes": 317,
+                "flightNumber": "636",
+                "marketingCarrier": {
+                  "id": -31722,
+                  "name": "United",
+                  "alternateId": "UA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -31722,
+                  "name": "United",
+                  "alternateId": "UA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              }
+            ]
+          }
+        ],
+        "isSelfTransfer": false,
+        "isProtectedSelfTransfer": false,
+        "farePolicy": {
+          "isChangeAllowed": false,
+          "isPartiallyChangeable": false,
+          "isCancellationAllowed": false,
+          "isPartiallyRefundable": false
+        },
+        "fareAttributes": {},
+        "isMashUp": false,
+        "hasFlexibleOptions": false,
+        "score": 0.653007
+      },
+      {
+        "id": "16157-2503301919--32573-1-13411-2503302253",
+        "price": {
+          "raw": 365.18,
+          "formatted": "$366",
+          "pricingOptionId": "-ZBQ3M7yjv5I"
+        },
+        "legs": [
+          {
+            "id": "16157-2503301919--32573-1-13411-2503302253",
+            "origin": {
+              "id": "SDF",
+              "entityId": "95673969",
+              "name": "Louisville Muhammad Ali International ",
+              "displayCode": "SDF",
+              "city": "Louisville",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "destination": {
+              "id": "LAS",
+              "entityId": "95673753",
+              "name": "Las Vegas Harry Reid International",
+              "displayCode": "LAS",
+              "city": "Las Vegas",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "durationInMinutes": 394,
+            "stopCount": 1,
+            "isSmallestStops": false,
+            "departure": "2025-03-30T19:19:00",
+            "arrival": "2025-03-30T22:53:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -32573,
+                  "alternateId": "AA",
+                  "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/AA.png",
+                  "name": "American Airlines"
+                }
+              ],
+              "operating": [
+                {
+                  "id": -31007,
+                  "name": "Envoy Air As American Eagle"
+                }
+              ],
+              "operationType": "partially_operated"
+            },
+            "segments": [
+              {
+                "id": "16157-15062-2503301919-2503301950--32573",
+                "origin": {
+                  "flightPlaceId": "SDF",
+                  "displayCode": "SDF",
+                  "parent": {
+                    "flightPlaceId": "SDFA",
+                    "displayCode": "SDF",
+                    "name": "Louisville",
+                    "type": "City"
+                  },
+                  "name": "Louisville Muhammad Ali International ",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "ORD",
+                  "displayCode": "ORD",
+                  "parent": {
+                    "flightPlaceId": "CHIA",
+                    "displayCode": "CHI",
+                    "name": "Chicago",
+                    "type": "City"
+                  },
+                  "name": "Chicago O'Hare International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T19:19:00",
+                "arrival": "2025-03-30T19:50:00",
+                "durationInMinutes": 91,
+                "flightNumber": "3741",
+                "marketingCarrier": {
+                  "id": -32573,
+                  "name": "American Airlines",
+                  "alternateId": "AA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -31007,
+                  "name": "Envoy Air As American Eagle",
+                  "alternateId": "",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              },
+              {
+                "id": "15062-13411-2503302038-2503302253--32573",
+                "origin": {
+                  "flightPlaceId": "ORD",
+                  "displayCode": "ORD",
+                  "parent": {
+                    "flightPlaceId": "CHIA",
+                    "displayCode": "CHI",
+                    "name": "Chicago",
+                    "type": "City"
+                  },
+                  "name": "Chicago O'Hare International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "LAS",
+                  "displayCode": "LAS",
+                  "parent": {
+                    "flightPlaceId": "LASA",
+                    "displayCode": "LAS",
+                    "name": "Las Vegas",
+                    "type": "City"
+                  },
+                  "name": "Las Vegas Harry Reid International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T20:38:00",
+                "arrival": "2025-03-30T22:53:00",
+                "durationInMinutes": 255,
+                "flightNumber": "1197",
+                "marketingCarrier": {
+                  "id": -32573,
+                  "name": "American Airlines",
+                  "alternateId": "AA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -32573,
+                  "name": "American Airlines",
+                  "alternateId": "AA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              }
+            ]
+          }
+        ],
+        "isSelfTransfer": false,
+        "isProtectedSelfTransfer": false,
+        "farePolicy": {
+          "isChangeAllowed": false,
+          "isPartiallyChangeable": false,
+          "isCancellationAllowed": false,
+          "isPartiallyRefundable": false
+        },
+        "fareAttributes": {},
+        "tags": [
+          "third_cheapest"
+        ],
+        "isMashUp": false,
+        "hasFlexibleOptions": false,
+        "score": 0.534575
+      },
+      {
+        "id": "16157-2503302014--32573-1-13411-2503302346",
+        "price": {
+          "raw": 365.18,
+          "formatted": "$366",
+          "pricingOptionId": "t9ppdBkKhsb2"
+        },
+        "legs": [
+          {
+            "id": "16157-2503302014--32573-1-13411-2503302346",
+            "origin": {
+              "id": "SDF",
+              "entityId": "95673969",
+              "name": "Louisville Muhammad Ali International ",
+              "displayCode": "SDF",
+              "city": "Louisville",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "destination": {
+              "id": "LAS",
+              "entityId": "95673753",
+              "name": "Las Vegas Harry Reid International",
+              "displayCode": "LAS",
+              "city": "Las Vegas",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "durationInMinutes": 392,
+            "stopCount": 1,
+            "isSmallestStops": false,
+            "departure": "2025-03-30T20:14:00",
+            "arrival": "2025-03-30T23:46:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -32573,
+                  "alternateId": "AA",
+                  "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/AA.png",
+                  "name": "American Airlines"
+                }
+              ],
+              "operating": [
+                {
+                  "id": -31007,
+                  "name": "Envoy Air As American Eagle"
+                }
+              ],
+              "operationType": "partially_operated"
+            },
+            "segments": [
+              {
+                "id": "16157-10968-2503302014-2503302150--32573",
+                "origin": {
+                  "flightPlaceId": "SDF",
+                  "displayCode": "SDF",
+                  "parent": {
+                    "flightPlaceId": "SDFA",
+                    "displayCode": "SDF",
+                    "name": "Louisville",
+                    "type": "City"
+                  },
+                  "name": "Louisville Muhammad Ali International ",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "DFW",
+                  "displayCode": "DFW",
+                  "parent": {
+                    "flightPlaceId": "DFWA",
+                    "displayCode": "DFW",
+                    "name": "Dallas",
+                    "type": "City"
+                  },
+                  "name": "Dallas Fort Worth International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T20:14:00",
+                "arrival": "2025-03-30T21:50:00",
+                "durationInMinutes": 156,
+                "flightNumber": "4011",
+                "marketingCarrier": {
+                  "id": -32573,
+                  "name": "American Airlines",
+                  "alternateId": "AA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -31007,
+                  "name": "Envoy Air As American Eagle",
+                  "alternateId": "",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              },
+              {
+                "id": "10968-13411-2503302251-2503302346--32573",
+                "origin": {
+                  "flightPlaceId": "DFW",
+                  "displayCode": "DFW",
+                  "parent": {
+                    "flightPlaceId": "DFWA",
+                    "displayCode": "DFW",
+                    "name": "Dallas",
+                    "type": "City"
+                  },
+                  "name": "Dallas Fort Worth International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "LAS",
+                  "displayCode": "LAS",
+                  "parent": {
+                    "flightPlaceId": "LASA",
+                    "displayCode": "LAS",
+                    "name": "Las Vegas",
+                    "type": "City"
+                  },
+                  "name": "Las Vegas Harry Reid International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T22:51:00",
+                "arrival": "2025-03-30T23:46:00",
+                "durationInMinutes": 175,
+                "flightNumber": "1135",
+                "marketingCarrier": {
+                  "id": -32573,
+                  "name": "American Airlines",
+                  "alternateId": "AA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -32573,
+                  "name": "American Airlines",
+                  "alternateId": "AA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              }
+            ]
+          }
+        ],
+        "isSelfTransfer": false,
+        "isProtectedSelfTransfer": false,
+        "farePolicy": {
+          "isChangeAllowed": false,
+          "isPartiallyChangeable": false,
+          "isCancellationAllowed": false,
+          "isPartiallyRefundable": false
+        },
+        "fareAttributes": {},
+        "tags": [
+          "second_cheapest",
+          "third_shortest"
+        ],
+        "isMashUp": false,
+        "hasFlexibleOptions": false,
+        "score": 0.347566
+      },
+      {
+        "id": "16157-2503301751--31722-1-13411-2503302155",
+        "price": {
+          "raw": 365.18,
+          "formatted": "$366",
+          "pricingOptionId": "e9Idv0Q7H5MC"
+        },
+        "legs": [
+          {
+            "id": "16157-2503301751--31722-1-13411-2503302155",
+            "origin": {
+              "id": "SDF",
+              "entityId": "95673969",
+              "name": "Louisville Muhammad Ali International ",
+              "displayCode": "SDF",
+              "city": "Louisville",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "destination": {
+              "id": "LAS",
+              "entityId": "95673753",
+              "name": "Las Vegas Harry Reid International",
+              "displayCode": "LAS",
+              "city": "Las Vegas",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "durationInMinutes": 424,
+            "stopCount": 1,
+            "isSmallestStops": false,
+            "departure": "2025-03-30T17:51:00",
+            "arrival": "2025-03-30T21:55:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -31722,
+                  "alternateId": "UA",
+                  "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/UA.png",
+                  "name": "United"
+                }
+              ],
+              "operating": [
+                {
+                  "id": -31525,
+                  "alternateId": "!ˆ",
+                  "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/%21%CB%86.png",
+                  "name": "Republic Airways DBA United Express"
+                }
+              ],
+              "operationType": "partially_operated"
+            },
+            "segments": [
+              {
+                "id": "16157-15062-2503301751-2503301840--31722",
+                "origin": {
+                  "flightPlaceId": "SDF",
+                  "displayCode": "SDF",
+                  "parent": {
+                    "flightPlaceId": "SDFA",
+                    "displayCode": "SDF",
+                    "name": "Louisville",
+                    "type": "City"
+                  },
+                  "name": "Louisville Muhammad Ali International ",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "ORD",
+                  "displayCode": "ORD",
+                  "parent": {
+                    "flightPlaceId": "CHIA",
+                    "displayCode": "CHI",
+                    "name": "Chicago",
+                    "type": "City"
+                  },
+                  "name": "Chicago O'Hare International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T17:51:00",
+                "arrival": "2025-03-30T18:40:00",
+                "durationInMinutes": 109,
+                "flightNumber": "3538",
+                "marketingCarrier": {
+                  "id": -31722,
+                  "name": "United",
+                  "alternateId": "UA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -31525,
+                  "name": "Republic Airways DBA United Express",
+                  "alternateId": "!ˆ",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              },
+              {
+                "id": "15062-13411-2503301940-2503302155--31722",
+                "origin": {
+                  "flightPlaceId": "ORD",
+                  "displayCode": "ORD",
+                  "parent": {
+                    "flightPlaceId": "CHIA",
+                    "displayCode": "CHI",
+                    "name": "Chicago",
+                    "type": "City"
+                  },
+                  "name": "Chicago O'Hare International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "LAS",
+                  "displayCode": "LAS",
+                  "parent": {
+                    "flightPlaceId": "LASA",
+                    "displayCode": "LAS",
+                    "name": "Las Vegas",
+                    "type": "City"
+                  },
+                  "name": "Las Vegas Harry Reid International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T19:40:00",
+                "arrival": "2025-03-30T21:55:00",
+                "durationInMinutes": 255,
+                "flightNumber": "1277",
+                "marketingCarrier": {
+                  "id": -31722,
+                  "name": "United",
+                  "alternateId": "UA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -31722,
+                  "name": "United",
+                  "alternateId": "UA",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              }
+            ]
+          }
+        ],
+        "isSelfTransfer": false,
+        "isProtectedSelfTransfer": false,
+        "farePolicy": {
+          "isChangeAllowed": false,
+          "isPartiallyChangeable": false,
+          "isCancellationAllowed": false,
+          "isPartiallyRefundable": false
+        },
+        "fareAttributes": {},
+        "isMashUp": false,
+        "hasFlexibleOptions": false,
+        "score": 0.340561
+      },
+      {
+        "id": "16157-2503301712--31825-1-13411-2503302340",
+        "price": {
+          "raw": 251.97,
+          "formatted": "$252",
+          "pricingOptionId": "TVZhVzTuUBCa"
+        },
+        "legs": [
+          {
+            "id": "16157-2503301712--31825-1-13411-2503302340",
+            "origin": {
+              "id": "SDF",
+              "entityId": "95673969",
+              "name": "Louisville Muhammad Ali International ",
+              "displayCode": "SDF",
+              "city": "Louisville",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "destination": {
+              "id": "LAS",
+              "entityId": "95673753",
+              "name": "Las Vegas Harry Reid International",
+              "displayCode": "LAS",
+              "city": "Las Vegas",
+              "country": "United States",
+              "isHighlighted": false
+            },
+            "durationInMinutes": 568,
+            "stopCount": 1,
+            "isSmallestStops": false,
+            "departure": "2025-03-30T17:12:00",
+            "arrival": "2025-03-30T23:40:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -31825,
+                  "alternateId": "NK",
+                  "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/NK.png",
+                  "name": "Spirit Airlines"
+                }
+              ],
+              "operationType": "fully_operated"
+            },
+            "segments": [
+              {
+                "id": "16157-13933-2503301712-2503301931--31825",
+                "origin": {
+                  "flightPlaceId": "SDF",
+                  "displayCode": "SDF",
+                  "parent": {
+                    "flightPlaceId": "SDFA",
+                    "displayCode": "SDF",
+                    "name": "Louisville",
+                    "type": "City"
+                  },
+                  "name": "Louisville Muhammad Ali International ",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "MCO",
+                  "displayCode": "MCO",
+                  "parent": {
+                    "flightPlaceId": "ORLB",
+                    "displayCode": "ORL",
+                    "name": "Orlando",
+                    "type": "City"
+                  },
+                  "name": "Orlando International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T17:12:00",
+                "arrival": "2025-03-30T19:31:00",
+                "durationInMinutes": 139,
+                "flightNumber": "967",
+                "marketingCarrier": {
+                  "id": -31825,
+                  "name": "Spirit Airlines",
+                  "alternateId": "NK",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -31825,
+                  "name": "Spirit Airlines",
+                  "alternateId": "NK",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              },
+              {
+                "id": "13933-13411-2503302116-2503302340--31825",
+                "origin": {
+                  "flightPlaceId": "MCO",
+                  "displayCode": "MCO",
+                  "parent": {
+                    "flightPlaceId": "ORLB",
+                    "displayCode": "ORL",
+                    "name": "Orlando",
+                    "type": "City"
+                  },
+                  "name": "Orlando International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "destination": {
+                  "flightPlaceId": "LAS",
+                  "displayCode": "LAS",
+                  "parent": {
+                    "flightPlaceId": "LASA",
+                    "displayCode": "LAS",
+                    "name": "Las Vegas",
+                    "type": "City"
+                  },
+                  "name": "Las Vegas Harry Reid International",
+                  "type": "Airport",
+                  "country": "United States"
+                },
+                "departure": "2025-03-30T21:16:00",
+                "arrival": "2025-03-30T23:40:00",
+                "durationInMinutes": 324,
+                "flightNumber": "746",
+                "marketingCarrier": {
+                  "id": -31825,
+                  "name": "Spirit Airlines",
+                  "alternateId": "NK",
+                  "allianceId": 0,
+                  "displayCode": ""
+                },
+                "operatingCarrier": {
+                  "id": -31825,
+                  "name": "Spirit Airlines",
+                  "alternateId": "NK",
+                  "allianceId": 0,
+                  "displayCode": ""
+                }
+              }
+            ]
+          }
+        ],
+        "isSelfTransfer": false,
+        "isProtectedSelfTransfer": false,
+        "farePolicy": {
+          "isChangeAllowed": false,
+          "isPartiallyChangeable": false,
+          "isCancellationAllowed": false,
+          "isPartiallyRefundable": false
+        },
+        "fareAttributes": {},
+        "tags": [
+          "cheapest"
+        ],
+        "isMashUp": false,
+        "hasFlexibleOptions": false,
+        "score": 0.384934
+      }
+    ],
     "messages": [],
     "filterStats": {
       "duration": {
-        "min": 0,
-        "max": 0,
-        "multiCityMin": 0,
-        "multiCityMax": 0
+        "min": 250,
+        "max": 568,
+        "multiCityMin": 250,
+        "multiCityMax": 568
       },
-      "airports": [],
-      "carriers": [],
+      "airports": [
+        {
+          "city": "Las Vegas",
+          "airports": [
+            {
+              "id": "LAS",
+              "entityId": "95673753",
+              "name": "Las Vegas Harry Reid International"
+            }
+          ]
+        },
+        {
+          "city": "Louisville",
+          "airports": [
+            {
+              "id": "SDF",
+              "entityId": "95673969",
+              "name": "Louisville Muhammad Ali International "
+            }
+          ]
+        }
+      ],
+      "carriers": [
+        {
+          "id": -32573,
+          "alternateId": "AA",
+          "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/AA.png",
+          "name": "American Airlines"
+        },
+        {
+          "id": -32385,
+          "alternateId": "DL",
+          "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/DL.png",
+          "name": "Delta"
+        },
+        {
+          "id": -31829,
+          "alternateId": "WN",
+          "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/WN.png",
+          "name": "Southwest Airlines"
+        },
+        {
+          "id": -31825,
+          "alternateId": "NK",
+          "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/NK.png",
+          "name": "Spirit Airlines"
+        },
+        {
+          "id": -31722,
+          "alternateId": "UA",
+          "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/UA.png",
+          "name": "United"
+        }
+      ],
       "stopPrices": {
         "direct": {
-          "isPresent": false
+          "isPresent": true,
+          "formattedPrice": "$529"
         },
         "one": {
-          "isPresent": false
+          "isPresent": true,
+          "formattedPrice": "$252"
         },
         "twoOrMore": {
           "isPresent": false
         }
       }
     },
-    "flightsSessionId": "",
+    "flightsSessionId": "95b3be61-3bd3-4401-84b8-5cf22d92cd03",
     "destinationImageUrl": "https://content.skyscnr.com/m/3719e8f4a5daf43d/original/Flights-Placeholder.jpg"
   }
 }
